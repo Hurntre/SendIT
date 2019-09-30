@@ -1,0 +1,36 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Send IT",
+    "description": "Send-IT ",
+    "version": "1.0"
+  },
+  "host": "http://127.0.0.1:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Welcome",
+      "description": "welcome users"
+    }
+  ],
+  "/": {
+    "get": {
+      "tags": ["Welcome"],
+      "summary": "GET API endpoint for getting all authors",
+      "produces": ["application/json"],
+      "consumes": ["application/x-www-form-urlencoded"],
+      "responses": {
+        "200": {
+          "description": "welcome"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "JWT": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
