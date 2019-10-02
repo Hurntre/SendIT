@@ -32,6 +32,9 @@ cd SendIT
 # Install Package dependencies
 npm install
 
+# create a .env file and make a clone of the .example.env
+touch .env
+
 #Start the application
 npm run start:dev
 
