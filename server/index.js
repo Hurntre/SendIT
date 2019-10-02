@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 // local imports
 // import routes from './routes/index';
-import swaggerSpec from '../swagger.json';
+import swaggerSpec from './documentation/swagger.json';
 import middlewares from './middlewares';
 import db from './db/index';
 

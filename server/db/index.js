@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
-
 import { Mockgoose } from 'mockgoose';
+import dotenv from 'dotenv';
 
-const DB_URI = 'mongodb://localhost:27017/myapp';
+dotenv.config();
+const DB_URI = process.env.MONGODB_URL;
 
 const connect = () => {
   return new Promise((resolve, reject) => {

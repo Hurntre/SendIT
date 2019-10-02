@@ -32,6 +32,9 @@ cd SendIT
 # Install Package dependencies
 npm install
 
+# create a .env file and make a clone of the .example.env
+touch .env
+
 #Start the application
 npm run start:dev
 
@@ -81,4 +84,4 @@ Project is currently being managed with Pivotal Tracker, a project management to
 - **Akaniru Victory** - _Team Lead_ - [Vic3King](https://github.com/vic3king)
 - **Ariyo Adefolaju** - _Software Engineer_ - [Hurntre](https://github.com/hurntre)
 
-See also the list of [contributors](https://github.com/andela/hermes-ah-backend/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/Hurntre/SendIT/graphs/contributors) who participated in this project.
