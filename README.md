@@ -1,6 +1,6 @@
 # SendIT
 
-
+[![Build Status](https://travis-ci.com/Hurntre/SendIT.svg?branch=master)](https://travis-ci.com/Hurntre/SendIT)
 SendIT - is a courier service that helps users deliver parcels to different destinations.
 
 ## Features
@@ -10,7 +10,6 @@ SendIT - is a courier service that helps users deliver parcels to different dest
 Required Features
 
 - coming soon
-
 
 ## API Documentation
 
