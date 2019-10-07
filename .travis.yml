@@ -1,8 +1,5 @@
 # single test suite, non-parallel build.
 
-env:
-  global:
-    - CC_TEST_REPORTER_ID=56ea929569dac96331d90c42f5ac4e25433dae8ddeb293ec307fe392a69f51aa
 language: node_js
 node_js:
   - 10.16.0
@@ -16,5 +13,6 @@ script:
   - npm run test
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-after_success: npm run coverage
+after_success: 
+  - npm run coverage
 
