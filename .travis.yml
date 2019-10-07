@@ -8,6 +8,8 @@ node_js:
   - 10.16.0
 services: mongodb
 before_script:
+    - sleep 15
+  - mongo mydb_test --eval 'db.createUser({user:"Adefolaju",pwd:"Adefolaju1",roles:["readWrite"]});'
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
