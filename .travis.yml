@@ -1,4 +1,21 @@
+# single test suite, non-parallel build.
+
+env:
+  global:
+    - CC_TEST_REPORTER_ID=56ea929569dac96331d90c42f5ac4e25433dae8ddeb293ec307fe392a69f51aa
 language: node_js
 node_js:
   - 10.16.0
 services: mongodb
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+  - npm run build 
+script:
+  - npm install
+  - npm test
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+after_success: npm run coverage
+
