@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+  border: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 50px;
+  line-height: 50px;
+  background: steelblue;
+  color: white;
+  overflow: hidden;
+}
+
+.navbar a {
+  text-align: center;
+  text-decoration: none;
+  padding: 0px 10px;
+  display: inline-block;
+  color: white;
+}
+
+.navbar a:hover {
+  color: black;
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 600px) {
+  .navbar {
+    justify-content: space-between;
+    padding-left: 10px;
+  }
+}
+
+#formArea {
+  max-width: 450px;
+  margin: 50px auto;
+}
+
+fieldset {
+  border: none;
+  text-align: center;
+}
+
+legend {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+form {
+  margin: 30px;
+}
+
+form input {
+  display: block;
+  width: 350px;
+  margin: 15px auto;
+  height: 25px;
+  line-height: 25px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+
+button {
+  background: steelblue;
+  color: white;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 1.05rem;
+}
+
+/* Homepage specific designs */
+
+#homepage {
+  background: steelblue;
+}
+
+#homepage main {
+  text-align: center;
+  margin: 50px auto;
+  min-width: 400px;
+  height: 80vh;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  color: white;
+}
+
+header p {
+  font-weight: 100;
+}
+
+#homepage .logo {
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: jokerman;
+}
+#homepage button {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  min-width: 390px;
+  margin: 15px auto;
+  padding: 0;
+}
+
+#signUpButtonLink {
+  border: 1px solid white;
+  text-decoration: none;
+  color: white;
+}
+
+#loginButtonLink {
+  background: white;
+  color: steelblue;
+  border: none;
+}
+
+button a {
+  text-decoration: none;
+  display: block;
+}
+
+#loginButtonLink a {
+  color: steelblue;
+}
+#signUpButtonLink a {
+  color: white;
+}

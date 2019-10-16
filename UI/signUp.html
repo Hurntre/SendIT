@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            SENDIT - LOGIN
+        </title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="authPages.css" type="text/css">
+        <meta name="keywords" content="HTML,CSS,JavaScript">
+        <meta name="author" content="Adefolaju Ariyo">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar" id="navbar">
+                <div class="navbarLogo" >
+                            <a href="home.html"> SENDIT </a> 
+                </div>
+                <div class="navbarMenu">
+                        <a target="self" href="logIn.html">LOGIN</a>
+                        <a href="signUp.html"> SIGNUP </a> 
+                       </div>
+            </nav>
+        </header>
+
+        <section id="formArea">
+            <fieldset>
+                <legend>CREATE AN ACCOUNT</legend>
+                <form action="" method="" >
+                        <input type="text" 
+                                required 
+                                placeholder="firstname" 
+                                pattern="[a-zA-Z]{5,}"
+                                maxlength="30"
+                                name="firstName"
+                                autofocus>
+                        <input type="text" 
+                                required 
+                                placeholder="lastname" 
+                                pattern="[a-zA-Z]{5,}"
+                                maxlength="30"
+                                name="lastName">
+                        <input type="email" 
+                                required 
+                                placeholder="email address"
+                                name="email">
+                        <input type="tel"
+                                required
+                                placeholder="phone number"
+                                name="phone_number">
+                        <input type="password" 
+                                required
+                                placeholder="password" 
+                                name="password"
+                                minlength="8">
+                        <button id="signUp-button">Submit</button>
+                </form>
+            </fieldset>
+        </section>
+    </body>
+</html>
