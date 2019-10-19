@@ -13,6 +13,7 @@ body {
   background: steelblue;
   color: white;
   overflow: hidden;
+  font-size: 14.5px;
 }
 
 .navbar a {
@@ -35,19 +36,66 @@ body {
   }
 }
 
-#formArea {
-  max-width: 450px;
-  margin: 50px auto;
+/* form */
+#mainView {
+  display: flex;
+  height: 100vh;
+  margin-top: -50px;
+  z-index: -1;
+  position: relative;
 }
 
+#formSide {
+  width: 40%;
+}
+
+#formPageImage {
+  width: 60%;
+  background-image: url(./Images/photo.jpg);
+  background-size: cover;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 720px) {
+  #formPageImage {
+    width: 40%;
+  }
+  #formSide {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  #formPageImage {
+    display: none;
+  }
+  #formSide {
+    width: 100%;
+  }
+}
+
+#formArea {
+  width: 450px;
+  margin: 100px auto;
+}
 fieldset {
   border: none;
-  text-align: center;
+}
+legend {
+  font-size: 20.8px;
+  font-weight: 700;
+  text-align: left;
+  margin-left: 27px;
+  color: steelblue;
 }
 
-legend {
-  font-size: 2rem;
-  font-weight: bold;
+@media screen and (max-width: 720px) {
+  #formArea {
+    margin-top: 150px;
+  }
+  legend {
+    font-size: 20.8px;
+    text-align: center;
+  }
 }
 
 form {
@@ -57,21 +105,52 @@ form {
 form input {
   display: block;
   width: 350px;
-  margin: 15px auto;
-  height: 25px;
-  line-height: 25px;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 1.1rem;
+  margin-bottom: 15px;
+  height: 18px;
+  font-size: 13px;
+  border: 1px solid #cacaca;
+  cursor: text;
+  background: #fafafa;
 }
 
-button {
+form input,
+form button {
+  line-height: 18px;
+  padding: 0.625rem;
+  border-radius: 2px;
+  margin-top: 15px;
+}
+
+form button {
   background: steelblue;
   color: white;
+  width: 200px;
+  font-size: 12px;
+  border: none;
+}
+
+form button.login-button {
   width: 100px;
-  height: 30px;
-  border-radius: 5px;
-  font-size: 1.05rem;
+}
+
+label {
+  display: block;
+  font-size: 11.2px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 4px;
+  letter-spacing: -0.5px;
+}
+
+.split-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.split-fields input {
+  display: inline-block;
+  width: 150px;
 }
 
 /* Homepage specific designs */

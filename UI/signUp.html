@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>
-            SENDIT - LOGIN
+            SendIT | SIGNUP
         </title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="authPages.css" type="text/css">
@@ -22,40 +22,61 @@
                        </div>
             </nav>
         </header>
+        <div id="mainView">
+            <div id="formSide">
+                <section id="formArea">
+                    <fieldset>
+                        <legend>Create Your Account</legend>
+                        <form action="" method="" >
+                            <label> name </label>
+                            <div class="split-fields" >
+                                <input type="text" 
+                                        required 
+                                        placeholder="firstname" 
+                                        pattern="[a-zA-Z]{5,}"
+                                        maxlength="30"
+                                        name="firstName"
+                                        autofocus>
+                                <input type="text" 
+                                        required 
+                                        placeholder="lastname" 
+                                        pattern="[a-zA-Z]{5,}"
+                                        maxlength="30"
+                                        name="lastName">
+                            </div>
+                            <label> email address </label>
+                                <input type="email" 
+                                        required 
+                                        placeholder="email address"
+                                        name="email">
+                            <label> phone number </label>
+                                <input type="tel"
+                                        required
+                                        placeholder="phone number"
+                                        name="phone_number">
+                            <label> password </label>
+                            <div class="split-fields" >
+                                <input type="password" 
+                                        required
+                                        placeholder="password" 
+                                        name="password"
+                                        minlength="8">
+                                <input type="password" 
+                                        required
+                                        placeholder="confirm password" 
+                                        name="password"
+                                        minlength="8">
+                            </div>
+                                <button id="signUp-button">CREATE MY ACCOUNT</button>
+                        </form>
+                    </fieldset>
+                </section>
+            </div>
+            <div id="formPageImage">
 
-        <section id="formArea">
-            <fieldset>
-                <legend>CREATE AN ACCOUNT</legend>
-                <form action="" method="" >
-                        <input type="text" 
-                                required 
-                                placeholder="firstname" 
-                                pattern="[a-zA-Z]{5,}"
-                                maxlength="30"
-                                name="firstName"
-                                autofocus>
-                        <input type="text" 
-                                required 
-                                placeholder="lastname" 
-                                pattern="[a-zA-Z]{5,}"
-                                maxlength="30"
-                                name="lastName">
-                        <input type="email" 
-                                required 
-                                placeholder="email address"
-                                name="email">
-                        <input type="tel"
-                                required
-                                placeholder="phone number"
-                                name="phone_number">
-                        <input type="password" 
-                                required
-                                placeholder="password" 
-                                name="password"
-                                minlength="8">
-                        <button id="signUp-button">Submit</button>
-                </form>
-            </fieldset>
-        </section>
+            </div>
+        </div>
+
     </body>
 </html>
+
