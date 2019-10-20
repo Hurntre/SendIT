@@ -3,6 +3,10 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+// for path resolution
+import path from 'path';
+// for access to request body
+import bodyParser from 'body-parser';
 
 // local imports
 // import routes from './routes/index';
@@ -23,8 +27,34 @@ app.use(express.json());
 app.use(trimmerMiddleware);
 app.use(cors());
 
+// allows the serving of custom files i.e. css and html
+app.use(express.static('UI'));
+// use bodyparser
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get('/', (req, res) => {
-  res.send('Welcome to Send-IT');
+  res.sendFile(path.join(__dirname, '../UI/home.html'));
+});
+
+// Login endpoint
+app.get('/logIn', (req, res) => {
+  res.sendFile(path.join(__dirname, '../UI/login.html'));
+});
+
+// SignUp endpoint
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, '../UI/signUp.html'));
+});
+// User Create Endpoint
+app.post('/users', (req, res) => {
+  const newUser = req.body.User;
+  db.User.create(newUser, (err, newUserCreated) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(`${newUserCreated}  Successfully created`);
+    }
+  });
 });
 
 app.get(`${baseUrl}/doc`, (req, res) => {

@@ -14,11 +14,11 @@
         <header>
             <nav class="navbar" id="navbar">
                 <div class="navbarLogo" >
-                            <a href="home.html"> SENDIT </a> 
+                            <a href="/"> SENDIT </a> 
                 </div>
                 <div class="navbarMenu">
-                        <a target="self" href="logIn.html">LOGIN</a>
-                        <a href="signUp.html"> SIGNUP </a> 
+                        <a target="self" href="/login">LOGIN</a>
+                        <a href="/signup"> SIGNUP </a> 
                        </div>
             </nav>
         </header>
@@ -27,7 +27,7 @@
                 <section id="formArea">
                     <fieldset>
                         <legend>Create Your Account</legend>
-                        <form action="" method="" >
+                        <form action="/users" method="POST" >
                             <label> name </label>
                             <div class="split-fields" >
                                 <input type="text" 
@@ -35,30 +35,30 @@
                                         placeholder="firstname" 
                                         pattern="[a-zA-Z]{5,}"
                                         maxlength="30"
-                                        name="firstName">
+                                        name="User[name][firstName]">
                                 <input type="text" 
                                         required 
                                         placeholder="lastname" 
                                         pattern="[a-zA-Z]{5,}"
                                         maxlength="30"
-                                        name="lastName">
+                                        name="User[name][lastName]">
                             </div>
                             <label> email address </label>
                                 <input type="email" 
                                         required 
                                         placeholder="email address"
-                                        name="email">
+                                        name="User[email]">
                             <label> phone number </label>
                                 <input type="tel"
                                         required
                                         placeholder="phone number"
-                                        name="phone_number">
+                                        name="User[phone_number]">
                             <label> password </label>
                             <div class="split-fields" >
                                 <input type="password" 
                                         required
                                         placeholder="password" 
-                                        name="password"
+                                        name="User[password]"
                                         minlength="8">
                                 <input type="password" 
                                         required

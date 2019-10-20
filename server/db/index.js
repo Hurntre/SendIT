@@ -41,4 +41,15 @@ const close = () => {
   return mongoose.disconnect();
 };
 
-module.exports = { connect, close };
+// USER SCHEMA
+const userSchema = new mongoose.Schema({
+  name: { firstName: String, lastName: String },
+  email: String,
+  phone_number: String,
+  password: String,
+});
+
+// USER MODEL
+const User = mongoose.model('User', userSchema);
+
+module.exports = { connect, close, User };
