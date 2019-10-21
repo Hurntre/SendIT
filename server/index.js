@@ -10,9 +10,11 @@ import bodyParser from 'body-parser';
 
 // local imports
 // import routes from './routes/index';
+import routes from './routes/index';
+import db from './db/index'
+
 import swaggerSpec from './documentation/swagger.json';
 import middlewares from './middlewares';
-import db from './db/index';
 
 // variables
 dotenv.config();
@@ -23,28 +25,16 @@ const { trimmerMiddleware } = middlewares;
 // initialize express server
 const app = express();
 
+// Express inbuilt body parser
 app.use(express.json());
 app.use(trimmerMiddleware);
 app.use(cors());
 
 // allows the serving of custom files i.e. css and html
 app.use(express.static('UI'));
-// use bodyparser
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../UI/home.html'));
-});
-
-app.post('/users', (req, res) => {
-  const newUser = req.body.User;
-  db.User.create(newUser, (err, newUserCreated) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(`${newUserCreated}  Successfully created`);
-    }
-  });
 });
 
 app.get(`${baseUrl}/doc`, (req, res) => {
@@ -52,8 +42,9 @@ app.get(`${baseUrl}/doc`, (req, res) => {
   res.send(swaggerSpec);
 });
 
-// app.use(`${baseUrl}`, routes);
-// app.use(`${baseUrl}/auth`, routes);
+// Routes with base URl
+app.use(`${baseUrl}`, routes);
+app.use(`${baseUrl}/auth`, routes);
 app.use(`${baseUrl}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // catch invalid routes
