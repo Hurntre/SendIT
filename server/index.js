@@ -5,13 +5,11 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 // for path resolution
 import path from 'path';
-// for access to request body
-import bodyParser from 'body-parser';
 
 // local imports
 // import routes from './routes/index';
 import routes from './routes/index';
-import db from './db/index'
+import db from './db/index';
 
 import swaggerSpec from './documentation/swagger.json';
 import middlewares from './middlewares';

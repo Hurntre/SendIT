@@ -10,10 +10,10 @@ const signUpController = (req, res) => {
       res.send(`${newUserCreated}  Successfully created`);
     }
   });
-}
+};
 
 const authController = {
-  signUpController
+  signUpController,
 };
 
 export default authController;
