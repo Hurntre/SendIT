@@ -36,16 +36,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../UI/home.html'));
 });
 
-// Login endpoint
-app.get('/logIn', (req, res) => {
-  res.sendFile(path.join(__dirname, '../UI/login.html'));
-});
-
-// SignUp endpoint
-app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, '../UI/signUp.html'));
-});
-// User Create Endpoint
 app.post('/users', (req, res) => {
   const newUser = req.body.User;
   db.User.create(newUser, (err, newUserCreated) => {
