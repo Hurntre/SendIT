@@ -16,6 +16,8 @@ import db from './db/index';
 dotenv.config();
 const baseUrl = '/api/v1';
 const port = process.env.PORT || 3000;
+
+// removes whitespaces from payload
 const { trimmerMiddleware } = middlewares;
 
 // initialize express server
