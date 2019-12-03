@@ -66,7 +66,7 @@
     "lint-staged": "^8.1.5",
     "mockgoose": "^8.0.3",
     "moment": "^2.24.0",
-    "mongoose": "^5.7.1",
+    "mongoose": "^5.7.5",
     "swagger-jsdoc": "^3.2.9",
     "swagger-ui-express": "^4.1.1"
   },
