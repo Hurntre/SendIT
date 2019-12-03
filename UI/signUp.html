@@ -27,7 +27,7 @@
                 <section id="formArea">
                     <fieldset>
                         <legend>Create Your Account</legend>
-                        <form action="/users" method="POST" >
+                        <form action="/api/v1/auth/signup" method="POST" >
                             <label> name </label>
                             <div class="split-fields" >
                                 <input type="text" 
@@ -35,13 +35,13 @@
                                         placeholder="firstname" 
                                         pattern="[a-zA-Z]{5,}"
                                         maxlength="30"
-                                        name="User[name][firstName]">
+                                        name="User[firstName]">
                                 <input type="text" 
                                         required 
                                         placeholder="lastname" 
                                         pattern="[a-zA-Z]{5,}"
                                         maxlength="30"
-                                        name="User[name][lastName]">
+                                        name="User[lastName]">
                             </div>
                             <label> email address </label>
                                 <input type="email" 
@@ -52,7 +52,7 @@
                                 <input type="tel"
                                         required
                                         placeholder="phone number"
-                                        name="User[phone_number]">
+                                        name="User[phoneNumber]">
                             <label> password </label>
                             <div class="split-fields" >
                                 <input type="password" 
@@ -63,7 +63,7 @@
                                 <input type="password" 
                                         required
                                         placeholder="confirm password" 
-                                        name="password"
+                                        name="User[repeat_password]"
                                         minlength="8">
                             </div>
                                 <button id="signUp-button">CREATE MY ACCOUNT</button>

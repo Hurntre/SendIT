@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 // for path resolution
 import path from 'path';
+import bodyParser from 'body-parser';
 
 // local imports
 // import routes from './routes/index';
@@ -28,6 +29,8 @@ app.use(express.json());
 app.use(trimmerMiddleware);
 app.use(cors());
 
+// bodyParser for access to req body
+app.use(bodyParser.urlencoded({ extended: true }));
 // allows the serving of custom files i.e. css and html
 app.use(express.static('UI'));
 
@@ -42,7 +45,6 @@ app.get(`${baseUrl}/doc`, (req, res) => {
 
 // Routes with base URl
 app.use(`${baseUrl}`, routes);
-app.use(`${baseUrl}/auth`, routes);
 app.use(`${baseUrl}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // catch invalid routes
