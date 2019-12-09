@@ -45,7 +45,6 @@ describe('User Creation', () => {
         repeat_password: 'pAsSwOrD',
       })
       .end((err, res) => {
-        // console.log(res);
         expect(res).to.have.status(404);
         done();
       });
