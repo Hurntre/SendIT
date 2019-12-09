@@ -24,7 +24,8 @@ const joiValidation = (req, res, next) => {
   const { error } = schema.validate(User);
 
   if (error) {
-    res.redirect('/signUp.html');
+    // console.log(error);
+    res.send(error);
   } else {
     return next();
   }

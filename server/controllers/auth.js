@@ -3,11 +3,15 @@ import UserModel from '../db/models/user';
 const signUpController = (req, res) => {
   const { User } = req.body;
 
-  UserModel.create(User, err => {
+  UserModel.create(User, (err, newUser) => {
     if (err) {
       res.send(err);
     } else {
-      res.redirect('/login.html');
+      // console.log(User);
+      res.json({
+        success: true,
+        newUser,
+      });
     }
   });
 };
