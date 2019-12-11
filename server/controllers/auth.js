@@ -5,7 +5,7 @@ const signUpController = (req, res) => {
 
   UserModel.create(User, (err, newUser) => {
     if (err) {
-      res.status(404).send(err);
+      res.status(400).send(err.details[0].message);
     } else {
       // console.log(User);
       res.json({

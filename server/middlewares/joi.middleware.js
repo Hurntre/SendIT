@@ -25,7 +25,7 @@ const joiValidation = (req, res, next) => {
 
   if (error) {
     // console.log(error);
-    res.status(404).send(error);
+    res.status(400).send(error.details[0].message);
   } else {
     return next();
   }
