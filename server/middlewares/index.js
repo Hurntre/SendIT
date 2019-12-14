@@ -1,7 +1,7 @@
 import trimmerMiddleware from './trimmer.middlewares';
-import joiValidation from './joi.middleware';
+import userSchemaValidation from './userSchemaValidation';
 
 export default {
   trimmerMiddleware,
-  joiValidation,
+  userSchemaValidation,
 };

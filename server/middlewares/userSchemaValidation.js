@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi';
 
-const joiValidation = (req, res, next) => {
+const userSchemaValidation = (req, res, next) => {
   const { User } = req.body;
   const schema = Joi.object({
     firstName: Joi.string()
@@ -24,11 +24,10 @@ const joiValidation = (req, res, next) => {
   const { error } = schema.validate(User);
 
   if (error) {
-    // console.log(error);
     res.status(400).send(error.details[0].message);
   } else {
     return next();
   }
 };
 
-export default joiValidation;
+export default userSchemaValidation;

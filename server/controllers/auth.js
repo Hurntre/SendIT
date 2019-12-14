@@ -7,7 +7,6 @@ const signUpController = (req, res) => {
     if (err) {
       res.status(400).send(err.details[0].message);
     } else {
-      // console.log(User);
       res.json({
         success: true,
         newUser,

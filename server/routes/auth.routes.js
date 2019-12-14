@@ -4,9 +4,13 @@ import middlewares from '../middlewares';
 
 const authRoute = express.Router();
 
-const { joiValidation } = middlewares;
+const { userSchemaValidation } = middlewares;
 const { authController } = controllers;
 
-authRoute.post('/signup', joiValidation, authController.signUpController);
+authRoute.post(
+  '/signup',
+  userSchemaValidation,
+  authController.signUpController
+);
 
 export default authRoute;

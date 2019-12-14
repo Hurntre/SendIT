@@ -1,4 +1,3 @@
-// import mocha from 'mocha';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../server/index';
@@ -19,12 +18,12 @@ describe('User Creation', () => {
   };
   const userDataUnTrimmed = {
     User: {
-      firstName: 'Nigeria',
-      lastName: 'Lagos',
+      firstName: '        Nigeria',
+      lastName: '      Lagos     ',
       email: '  email@yahoo.com  ',
-      phoneNumber: '08088888888',
-      password: 'pAsSwOrD',
-      repeat_password: 'pAsSwOrD',
+      phoneNumber: '     08088888888    ',
+      password: '     pAsSwOrD',
+      repeat_password: '    pAsSwOrD',
     },
   };
   const userIncomplete = {
@@ -62,7 +61,7 @@ describe('User Creation', () => {
       .post(route)
       .send(userDataUnTrimmed)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(200);
         done();
       });
   });
