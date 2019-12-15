@@ -4,12 +4,14 @@ import middlewares from '../middlewares';
 
 const authRoute = express.Router();
 
-const { userSchemaValidation } = middlewares;
+const { signupValidation, userCheckByEmail, userCheckByPhone } = middlewares;
 const { authController } = controllers;
 
 authRoute.post(
   '/signup',
-  userSchemaValidation,
+  signupValidation,
+  userCheckByEmail,
+  userCheckByPhone,
   authController.signUpController
 );
 

@@ -1,7 +1,7 @@
 import Joi from '@hapi/joi';
 
-const userSchemaValidation = (req, res, next) => {
-  const { User } = req.body;
+const signupValidation = (req, res, next) => {
+  const { body } = req;
   const schema = Joi.object({
     firstName: Joi.string()
       .required()
@@ -18,16 +18,19 @@ const userSchemaValidation = (req, res, next) => {
     password: Joi.string()
       .required()
       .pattern(/^[a-zA-Z0-9]{8,30}$/),
-    repeat_password: Joi.ref('password'),
-  });
+    confirmPassword: Joi.ref('password'),
+  }).with('password', 'confirmPassword');
 
-  const { error } = schema.validate(User);
+  const { error } = schema.validate(body);
 
   if (error) {
-    res.status(400).send(error.details[0].message);
+    res.status(400).send({
+      success: false,
+      error: error.details[0].message,
+    });
   } else {
     return next();
   }
 };
 
-export default userSchemaValidation;
+export default signupValidation;
