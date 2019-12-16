@@ -18,7 +18,7 @@ Required Features
 
 The full API documentation can be found by following the link below:
 
-http://localhost/api/v1/api-docs/
+https://sendit-api--staging.herokuapp.com/api/v1/api-docs/
 
 ## Requirements and Installation
 

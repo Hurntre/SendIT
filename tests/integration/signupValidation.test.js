@@ -1,6 +1,6 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../../server/index';
+import app from '../../server/app';
 import seeds from '../../server/db/seeders/seed';
 
 chai.use(chaiHttp);

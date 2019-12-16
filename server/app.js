@@ -3,22 +3,25 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import compression from 'compression';
+import helmet from 'helmet';
+
 // for path resolution
 import path from 'path';
 import bodyParser from 'body-parser';
 
 // local imports
-// import routes from './routes/index';
 import routes from './routes/index';
 import db from './db/index';
-
-import swaggerSpec from './documentation/swagger.json';
+import swaggerSpec from '../documentation/swagger.json';
 import middlewares from './middlewares';
 
 // variables
 dotenv.config();
 const baseUrl = '/api/v1';
 const port = process.env.PORT || 3000;
+
+// removes whitespaces from payload
 const { trimmerMiddleware } = middlewares;
 
 // initialize express server
@@ -28,6 +31,8 @@ const app = express();
 app.use(express.json());
 app.use(trimmerMiddleware);
 app.use(cors());
+app.use(compression()); // Compress all routes
+app.use(helmet()); // Security middleware
 
 // bodyParser for access to req body
 app.use(bodyParser.urlencoded({ extended: true }));
