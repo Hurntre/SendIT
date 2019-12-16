@@ -1,8 +1,12 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../server/index';
+import seeds from '../../server/db/seeders/seed';
 
 chai.use(chaiHttp);
+
+// should clear and seed db where needed
+before(() => seeds());
 
 describe('User Creation', () => {
   const route = '/api/v1/auth/signup';
@@ -120,7 +124,7 @@ describe('User Creation', () => {
         const { success, error } = res.body;
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
-        expect(error).to.equal('"firstName" is required');
+        expect(error).to.equal('firstName is required');
         done();
       });
   });
@@ -139,7 +143,7 @@ describe('User Creation', () => {
         const { success, error } = res.body;
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
-        expect(error).to.equal('"lastName" is required');
+        expect(error).to.equal('lastName is required');
         done();
       });
   });
@@ -158,7 +162,7 @@ describe('User Creation', () => {
         const { success, error } = res.body;
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
-        expect(error).to.equal('"email" is required');
+        expect(error).to.equal('email is required');
         done();
       });
   });
@@ -178,7 +182,7 @@ describe('User Creation', () => {
         const { success, error } = res.body;
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
-        expect(error).to.equal('"email" must be a valid email');
+        expect(error).to.equal('email must be a valid email');
         done();
       });
   });
@@ -198,7 +202,7 @@ describe('User Creation', () => {
         const { success, error } = res.body;
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
-        expect(error).to.equal('"email" must be a valid email');
+        expect(error).to.equal('email must be a valid email');
         done();
       });
   });
@@ -217,7 +221,7 @@ describe('User Creation', () => {
         const { success, error } = res.body;
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
-        expect(error).to.equal('"phoneNumber" is required');
+        expect(error).to.equal('phoneNumber is required');
         done();
       });
   });
@@ -236,7 +240,7 @@ describe('User Creation', () => {
         const { success, error } = res.body;
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
-        expect(error).to.equal('"password" is required');
+        expect(error).to.equal('password is required');
         done();
       });
   });
@@ -257,7 +261,7 @@ describe('User Creation', () => {
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
         expect(error).to.equal(
-          '"password" with value "pAsSwor" fails to match the required pattern: /^[a-zA-Z0-9]{8,30}$/'
+          'password with value pAsSwor fails to match the required pattern: /^[a-zA-Z0-9]{8,30}$/'
         );
         done();
       });
@@ -278,7 +282,7 @@ describe('User Creation', () => {
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
         expect(error).to.equal(
-          '"password" missing required peer "confirmPassword"'
+          'password missing required peer confirmPassword'
         );
         done();
       });
@@ -299,7 +303,7 @@ describe('User Creation', () => {
         const { success, error } = res.body;
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
-        expect(error).to.equal('"confirmPassword" must be [ref:password]');
+        expect(error).to.equal('confirmPassword must be [ref:password]');
         done();
       });
   });

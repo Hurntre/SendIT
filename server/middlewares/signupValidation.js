@@ -1,4 +1,5 @@
 import Joi from '@hapi/joi';
+import joiFormater from '../helpers/joi-formatter';
 
 const signupValidation = (req, res, next) => {
   const { body } = req;
@@ -24,13 +25,14 @@ const signupValidation = (req, res, next) => {
   const { error } = schema.validate(body);
 
   if (error) {
-    res.status(400).send({
+    const { message } = error.details[0];
+    const formatedMessage = joiFormater(message);
+    return res.status(400).send({
       success: false,
-      error: error.details[0].message,
+      error: formatedMessage,
     });
-  } else {
-    return next();
   }
+  return next();
 };
 
 export default signupValidation;
