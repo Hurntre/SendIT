@@ -27,7 +27,7 @@
                 <section id="formArea">
                     <fieldset>
                         <legend>Create Your Account</legend>
-                        <form action="" method="" >
+                        <form action="/api/v1/auth/signup" method="POST" >
                             <label> name </label>
                             <div class="split-fields" >
                                 <input type="text" 
@@ -52,7 +52,7 @@
                                 <input type="tel"
                                         required
                                         placeholder="phone number"
-                                        name="phone_number">
+                                        name="phoneNumber">
                             <label> password </label>
                             <div class="split-fields" >
                                 <input type="password" 
@@ -63,7 +63,7 @@
                                 <input type="password" 
                                         required
                                         placeholder="confirm password" 
-                                        name="password"
+                                        name="confirmPassword"
                                         minlength="8">
                             </div>
                                 <button id="signUp-button">CREATE MY ACCOUNT</button>

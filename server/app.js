@@ -6,11 +6,15 @@ import dotenv from 'dotenv';
 import compression from 'compression';
 import helmet from 'helmet';
 
+// for path resolution
+import path from 'path';
+import bodyParser from 'body-parser';
+
 // local imports
-// import routes from './routes/index';
+import routes from './routes/index';
+import db from './db/index';
 import swaggerSpec from '../documentation/swagger.json';
 import middlewares from './middlewares';
-import db from './db/index';
 
 // variables
 dotenv.config();
@@ -23,14 +27,20 @@ const { trimmerMiddleware } = middlewares;
 // initialize express server
 const app = express();
 
+// Express inbuilt body parser
 app.use(express.json());
 app.use(trimmerMiddleware);
 app.use(cors());
 app.use(compression()); // Compress all routes
 app.use(helmet()); // Security middleware
 
+// bodyParser for access to req body
+app.use(bodyParser.urlencoded({ extended: true }));
+// allows the serving of custom files i.e. css and html
+app.use(express.static('UI'));
+
 app.get('/', (req, res) => {
-  res.send('Welcome to Send-IT');
+  res.sendFile(path.join(__dirname, '../UI/home.html'));
 });
 
 app.get(`${baseUrl}/doc`, (req, res) => {
@@ -38,8 +48,8 @@ app.get(`${baseUrl}/doc`, (req, res) => {
   res.send(swaggerSpec);
 });
 
-// app.use(`${baseUrl}`, routes);
-// app.use(`${baseUrl}/auth`, routes);
+// Routes with base URl
+app.use(`${baseUrl}`, routes);
 app.use(`${baseUrl}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // catch invalid routes
