@@ -34,6 +34,7 @@ describe('User Creation', () => {
           'phoneNumber',
           'password',
           '__v',
+          'token',
         ]);
         expect(error).to.equal(undefined);
         done();
@@ -105,6 +106,7 @@ describe('User Creation', () => {
           'phoneNumber',
           'password',
           '__v',
+          'token',
         ]);
         done();
       });
