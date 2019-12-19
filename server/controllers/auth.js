@@ -6,7 +6,7 @@ const signUpController = (req, res) => {
     if (error) {
       res.status(400).send({
         success: false,
-        error,
+        error: error.details[0].message,
       });
     } else {
       res.json({
