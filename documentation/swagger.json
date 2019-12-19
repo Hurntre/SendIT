@@ -2,35 +2,105 @@
   "swagger": "2.0",
   "info": {
     "title": "Send IT",
-    "description": "Send-IT ",
-    "version": "1.0"
+    "description": "Send-IT - a courier service that helps users deliver parcels to different destinations ",
+    "version": "1.0",
+    "contact": {
+      "email": "adefolajuariyo@gmail.com"
+    }
   },
-  "host": "http://127.0.0.1:3000",
+  "host": "localhost:3000",
   "basePath": "/api/v1",
   "tags": [
     {
       "name": "Welcome",
       "description": "welcome users"
+    },
+    {
+      "name": "Auth",
+      "description": "SignUp and Signin users"
     }
   ],
-  "/": {
-    "get": {
-      "tags": ["Welcome"],
-      "summary": "GET API endpoint for getting all authors",
-      "produces": ["application/json"],
-      "consumes": ["application/x-www-form-urlencoded"],
-      "responses": {
-        "200": {
-          "description": "welcome"
+  "schemes": ["http"],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Welcome"],
+        "summary": "GET API endpoint for welcome page",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "welcome"
+          }
         }
       }
-    }
-  },
-  "securityDefinitions": {
-    "JWT": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header"
+    },
+
+    "/auth/signup": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "POST API endpoint for signing up new user",
+        "produces": ["application/json"],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "firstName",
+            "in": "formData",
+            "description": "first name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lastName",
+            "in": "formData",
+            "description": "last name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "email of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phoneNumber",
+            "in": "formData",
+            "description": "phone name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "users password",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "confirmPassword",
+            "in": "formData",
+            "description": "users password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user successfully created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "JWT": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
     }
   }
 }
