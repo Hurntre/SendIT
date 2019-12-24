@@ -7,8 +7,8 @@ const authHelper = {
   hashPassword: password => {
     return bcrypt.hashSync(password, 10);
   },
-  comparePassword: (hashPassword, password) => {
-    return bcrypt.compareSync(password, hashPassword);
+  comparePassword: (hashedPassword, password) => {
+    return bcrypt.compareSync(password, hashedPassword);
   },
 };
 
