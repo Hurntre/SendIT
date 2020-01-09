@@ -32,9 +32,29 @@ describe('User Creation', () => {
           'lastName',
           'email',
           'phoneNumber',
-          'password',
           '__v',
         ]);
+        expect(error).to.equal(undefined);
+        done();
+      });
+  });
+  it('should return a token as part of a 200 response  ', done => {
+    chai
+      .request(app)
+      .post(route)
+      .send({
+        firstName: 'qwery',
+        lastName: 'qwertyu',
+        email: 'emailqwet@yahoo.com',
+        phoneNumber: '08099999999',
+        password: 'pAsSwOrD',
+        confirmPassword: 'pAsSwOrD',
+      })
+      .end((err, res) => {
+        const { success, error, token } = res.body;
+        expect(res).to.have.status(200);
+        expect(success).to.equal(true);
+        expect(token).to.not.equal(undefined && null);
         expect(error).to.equal(undefined);
         done();
       });
@@ -103,7 +123,6 @@ describe('User Creation', () => {
           'lastName',
           'email',
           'phoneNumber',
-          'password',
           '__v',
         ]);
         done();
