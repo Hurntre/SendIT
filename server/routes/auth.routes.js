@@ -4,7 +4,12 @@ import middlewares from '../middlewares';
 
 const authRoute = express.Router();
 
-const { signupValidation, userCheckByEmail, userCheckByPhone } = middlewares;
+const {
+  signupValidation,
+  loginValidation,
+  userCheckByEmail,
+  userCheckByPhone,
+} = middlewares;
 const { authController } = controllers;
 
 authRoute.post(
@@ -14,5 +19,7 @@ authRoute.post(
   userCheckByPhone,
   authController.signUpController
 );
+
+authRoute.post('/login', loginValidation, authController.loginController);
 
 export default authRoute;

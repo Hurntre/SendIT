@@ -95,6 +95,38 @@
         }
       }
     },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "POST API endpoint for logging in user",
+        "produces": ["application/json"],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "email of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "users password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user successfully logged in"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
     "securityDefinitions": {
       "JWT": {
         "type": "apiKey",
