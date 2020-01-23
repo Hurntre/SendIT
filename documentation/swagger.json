@@ -17,7 +17,7 @@
     },
     {
       "name": "Auth",
-      "description": "SignUp and Signin users"
+      "description": "SignUp,login users and reset password"
     }
   ],
   "schemes": ["http"],
@@ -123,6 +123,85 @@
           },
           "400": {
             "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/auth/reset": {
+      "post": {
+        "tag": ["Auth"],
+        "summary": "POST API endpoint for password reset mail request by user",
+        "produces": ["application/json"],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "email of the user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset email contained reset page link with token has been sent to provided mail"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/auth/reset/{token}": {
+      "get": {
+        "tag": ["Auth"],
+        "summary": "GET API endpoint for access to password reset page by user",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "token param is valid"
+          },
+          "400": {
+            "description": "Invalid token param"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "post": {
+        "tag": ["Auth"],
+        "summary": "POST API endpoint for password reset mail request by user",
+        "produces": ["application/json"],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "new password of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "confirmPassword",
+            "in": "formData",
+            "description": "new password confirmation",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset successful"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server Error"
           }
         }
       }

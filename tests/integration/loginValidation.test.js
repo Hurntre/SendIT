@@ -10,7 +10,6 @@ before(() => {
   seeds.usersDeleteSeed();
   seeds.userCreateSeed();
 });
-after(() => seeds.usersDeleteSeed());
 
 describe('User Login', () => {
   const loginRoute = '/api/v1/auth/login';
@@ -50,7 +49,9 @@ describe('User Login', () => {
         const { success, error } = res.body;
         expect(res).to.have.status(400);
         expect(success).to.equal(false);
-        expect(error).to.equal('No registered user with that email');
+        expect(error).to.equal(
+          'The email address is not associated with any account'
+        );
         done();
       });
   });

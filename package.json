@@ -8,9 +8,9 @@
   "main": "app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production && npm run build && node dist/app.js",
-    "start:dev": "nodemon server/app.js --exec babel-node",
+    "start:dev": "cross-env NODE_ENV=development nodemon server/app.js --exec babel-node",
     "build": "babel server -d dist",
-    "test": "cross-env NODE_ENV=test && nyc  --reporter=html --reporter=text mocha tests --recursive --timeout 20000 --require @babel/register --exit",
+    "test": "cross-env NODE_ENV=test && nyc  --reporter=html --reporter=text mocha tests --recursive --timeout 50000 --require @babel/register --exit",
     "eslint:check": " node node_modules/eslint/bin/eslint.js \"./**/*.js\"",
     "eslint:fix": "eslint --fix src/",
     "prettier:check": "prettier --check \"./**/*.js\"",
@@ -67,6 +67,7 @@
     "lint-staged": "^8.1.5",
     "moment": "^2.24.0",
     "mongoose": "^5.7.5",
+    "nodemailer": "^6.4.2",
     "swagger-jsdoc": "^3.2.9",
     "swagger-ui-express": "^4.1.1"
   },
