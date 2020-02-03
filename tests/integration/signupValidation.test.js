@@ -7,7 +7,6 @@ chai.use(chaiHttp);
 
 // should clear and seed db where needed
 before(() => seeds.usersDeleteSeed());
-after(() => seeds.usersDeleteSeed());
 
 describe('User Creation', () => {
   const route = '/api/v1/auth/signup';

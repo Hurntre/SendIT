@@ -9,6 +9,7 @@ const {
   loginValidation,
   userCheckByEmail,
   userCheckByPhone,
+  resetValidations,
 } = middlewares;
 const { authController } = controllers;
 
@@ -22,4 +23,18 @@ authRoute.post(
 
 authRoute.post('/login', loginValidation, authController.loginController);
 
+authRoute.post(
+  '/reset',
+  resetValidations.emailValidation,
+  authController.passwordResetRequest
+);
+
+authRoute.get('/reset/:token', authController.passwordResetPageRequest);
+
+authRoute.post(
+  '/reset/:token',
+  resetValidations.newPasswordValidation,
+  resetValidations.passwordMatchCheck,
+  authController.updatePassword
+);
 export default authRoute;
