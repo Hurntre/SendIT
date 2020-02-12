@@ -1,6 +1,9 @@
 import express from 'express';
+import passport from 'passport';
 import controllers from '../controllers';
 import middlewares from '../middlewares';
+// eslint-disable-next-line no-unused-vars
+import passportSetup from '../helpers/passportSetup';
 
 const authRoute = express.Router();
 
@@ -11,30 +14,61 @@ const {
   userCheckByPhone,
   resetValidations,
 } = middlewares;
-const { authController } = controllers;
+const {
+  authController: {
+    loginController,
+    passwordResetPageRequest,
+    passwordResetRequest,
+    signUpController,
+    updatePassword,
+    socialRedirect,
+  },
+} = controllers;
 
 authRoute.post(
   '/signup',
   signupValidation,
   userCheckByEmail,
   userCheckByPhone,
-  authController.signUpController
+  signUpController
 );
 
-authRoute.post('/login', loginValidation, authController.loginController);
+authRoute.post('/login', loginValidation, loginController);
 
 authRoute.post(
   '/reset',
   resetValidations.emailValidation,
-  authController.passwordResetRequest
+  passwordResetRequest
 );
 
-authRoute.get('/reset/:token', authController.passwordResetPageRequest);
+authRoute.get('/reset/:token', passwordResetPageRequest);
 
 authRoute.post(
   '/reset/:token',
   resetValidations.newPasswordValidation,
   resetValidations.passwordMatchCheck,
-  authController.updatePassword
+  updatePassword
 );
+
+authRoute.get(
+  '/google',
+  passport.authenticate('google', {
+    scope: ['profile'],
+  })
+);
+
+authRoute.get(
+  '/google/redirect',
+  passport.authenticate('google'),
+  socialRedirect
+);
+
+authRoute.get('/github', passport.authenticate('github', { scope: ['user'] }));
+
+authRoute.get(
+  '/github/redirect',
+  passport.authenticate('github'),
+  socialRedirect
+);
+
 export default authRoute;

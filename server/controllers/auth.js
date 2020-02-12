@@ -153,12 +153,71 @@ const updatePassword = async (req, res) => {
   }
 };
 
+const socialRedirect = (req, res) => {
+  return res.status(200).json({
+    success: true,
+    message: `Social user ${req.user.firstName} ${
+      req.user.lastName
+    } is logged in`,
+  });
+};
+
+const googlePassportCallback = (accessToken, refreshToken, profile, done) => {
+  const {
+    name: { givenName, familyName },
+    id,
+  } = profile;
+
+  UserModel.findOneOrCreate(
+    { socialID: id },
+    {
+      firstName: givenName,
+      lastName: familyName,
+      socialID: id,
+    },
+    (err, existingUser) => {
+      console.log(`user is: ${existingUser}`);
+      done(null, existingUser);
+    },
+    (err, newUser) => {
+      console.log(`new user created: ${newUser}`);
+      done(null, newUser);
+    }
+  );
+};
+
+const githubPassportCallback = (accessToken, refreshToken, profile, done) => {
+  const { id, emails, displayName } = profile;
+
+  const name = displayName.split(' ');
+  UserModel.findOneOrCreate(
+    { socialID: id },
+    {
+      firstName: name[0],
+      lastName: name[1],
+      email: emails[0].value,
+      socialID: id,
+    },
+    (err, existingUser) => {
+      console.log(`user is: ${existingUser}`);
+      done(null, existingUser);
+    },
+    (err, newUser) => {
+      console.log(`new user created: ${newUser}`);
+      done(null, newUser);
+    }
+  );
+};
+
 const authController = {
   signUpController,
   loginController,
+  socialRedirect,
   passwordResetRequest,
   passwordResetPageRequest,
   updatePassword,
+  googlePassportCallback,
+  githubPassportCallback,
 };
 
 export default authController;
