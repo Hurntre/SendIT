@@ -5,6 +5,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import compression from 'compression';
 import helmet from 'helmet';
+import passport from 'passport';
+import cookieSession from 'cookie-session';
 
 // for path resolution
 import path from 'path';
@@ -33,6 +35,19 @@ app.use(trimmerMiddleware);
 app.use(cors());
 app.use(compression()); // Compress all routes
 app.use(helmet()); // Security middleware
+
+// cookie encryption package setup
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [process.env.cookieSessionKey],
+  })
+);
+
+// passport initialization and setting up app to use passport session
+// for oauth20 login
+app.use(passport.initialize());
+app.use(passport.session());
 
 // bodyParser for access to req body
 app.use(bodyParser.urlencoded({ extended: true }));
