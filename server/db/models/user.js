@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import mongoose from 'mongoose';
 import userSchema from '../schemas/userSchema';
 import authHelper from '../../helpers/auth';
