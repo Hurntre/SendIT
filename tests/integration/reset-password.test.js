@@ -89,6 +89,7 @@ describe('Password Reset', () => {
           '_id',
           'firstName',
           'lastName',
+          'isAdmin',
           'email',
           'phoneNumber',
           '__v',

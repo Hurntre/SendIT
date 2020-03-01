@@ -6,6 +6,8 @@ dotenv.config();
 const MONGO_URI = process.env.MONGODB_URL;
 const TEST_MONGO_URI = process.env.TEST_MONGO_URI;
 
+// TODO: Refactor new Promise to use tryCatch if possible
+
 const connect = () =>
   new Promise((resolve, reject) => {
     if (process.env.NODE_ENV === 'test') {
