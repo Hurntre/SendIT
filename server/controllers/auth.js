@@ -188,13 +188,16 @@ export default class AuthController {
     const {
       name: { givenName, familyName },
       id,
+      emails,
     } = profile;
 
     UserModel.findOneOrCreate(
-      { socialID: id },
+      { email: emails[0].value },
       {
         firstName: givenName,
         lastName: familyName,
+        email: emails[0].value,
+        password: id,
         socialID: id,
       },
       (err, existingUser) => {
@@ -223,6 +226,7 @@ export default class AuthController {
         firstName: name[0],
         lastName: name[1],
         email: emails[0].value,
+        password: id,
         socialID: id,
       },
       (err, existingUser) => {

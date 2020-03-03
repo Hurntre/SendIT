@@ -4,7 +4,7 @@ import userSchema from '../schemas/userSchema';
 import authHelper from '../../helpers/auth';
 
 userSchema.pre('validate', async function hashIt() {
-  if (this.isNew && this.socialID === undefined) {
+  if (this.isNew) {
     const hashedPassword = await authHelper.hashPassword(this.password);
     this.password = hashedPassword;
   }
