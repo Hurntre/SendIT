@@ -1,9 +1,8 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 import express from 'express';
 import passport from 'passport';
 import controllers from '../controllers';
 import middlewares from '../middlewares';
-// eslint-disable-next-line no-unused-vars
 import passportSetup from '../config/passportSetup';
 
 const authRoute = express.Router();
