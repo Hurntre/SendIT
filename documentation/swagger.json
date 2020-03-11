@@ -18,6 +18,10 @@
     {
       "name": "Auth",
       "description": "SignUp,login users and reset password"
+    },
+    {
+      "name": "Parcel",
+      "description": "create, update, cancel, display parcels"
     }
   ],
   "schemes": ["http"],
@@ -199,6 +203,38 @@
           },
           "400": {
             "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/parcel/parcels": {
+      "get": {
+        "tags": ["Parcel"],
+        "summary": "GET API endpoint for all parcels created by all users",
+        "parameters": {
+          "in": "header",
+          "name": "Authorization",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        },
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "All parcels retrieved successfully"
+          },
+          "400": {
+            "description": "No parcel exists in db"
+          },
+          "401": {
+            "description": "User not authorized"
+          },
+          "403": {
+            "description": "Invalid token"
           },
           "500": {
             "description": "Server Error"

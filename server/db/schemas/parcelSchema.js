@@ -10,6 +10,12 @@ const parcelSchema = new Schema({
   pickUpDate: { type: Date, required: true },
   expectedDeliveryDate: { type: Date, required: false },
   dateDelivered: { type: String, required: false },
+  senderID: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
   pickUpLocation: { type: String, required: false },
   receiverName: { type: String, required: true },
   receiverPhoneNumber: { type: Number, required: true },

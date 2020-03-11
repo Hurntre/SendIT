@@ -10,6 +10,6 @@ const {
   parcelController: { getAllParcel },
 } = controllers;
 
-parcelRoute.get('/allParcel', verifyToken, getAllParcel);
+parcelRoute.get('/parcels', verifyToken, getAllParcel);
 
 export default parcelRoute;

@@ -16,6 +16,12 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  parcels: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Parcels',
+    },
+  ],
 });
 
 export default userSchema;

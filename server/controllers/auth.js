@@ -172,11 +172,10 @@ export default class AuthController {
   }
 
   static async socialRedirect(req, res) {
+    const { firstName, lastName } = req.user;
     return res.status(200).json({
       success: true,
-      message: `Social user ${req.user.firstName} ${
-        req.user.lastName
-      } is logged in`,
+      message: `Social user ${firstName} ${lastName} is logged in`,
     });
   }
 

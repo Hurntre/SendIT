@@ -6,7 +6,7 @@ const usersDeleteSeed = async () => {
 };
 
 const userCreateSeed = async () => {
-  await UserModel.insertMany(
+  await UserModel.insertMany([
     {
       firstName: 'Nigeria',
       lastName: 'Lagos',
@@ -23,8 +23,8 @@ const userCreateSeed = async () => {
       password: 'pAsSwOrD',
       confirmPassword: 'pAsSwOrD',
       isAdmin: 'true',
-    }
-  );
+    },
+  ]);
 };
 
 const parcelDeleteSeed = async () => {
@@ -32,7 +32,7 @@ const parcelDeleteSeed = async () => {
 };
 
 const parcelCreateSeed = async () => {
-  await ParcelModel.insertMany(
+  await ParcelModel.insertMany([
     {
       description: 'A White stockie Esbee footwear',
       weight: 1.15,
@@ -50,8 +50,8 @@ const parcelCreateSeed = async () => {
       receiverName: 'Adefolaju Ariyo',
       receiverPhoneNumber: '08140159932',
       receiverAddress: 'your house number, street, area, town, city, state.',
-    }
-  );
+    },
+  ]);
 };
 const seeds = {
   usersDeleteSeed,
