@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable require-jsdoc */
 import UserModel from '../db/models/user';
 import authHelper from '../helpers/auth';
@@ -171,11 +172,10 @@ export default class AuthController {
   }
 
   static async socialRedirect(req, res) {
+    const { firstName, lastName } = req.user;
     return res.status(200).json({
       success: true,
-      message: `Social user ${req.user.firstName} ${
-        req.user.lastName
-      } is logged in`,
+      message: `Social user ${firstName} ${lastName} is logged in`,
     });
   }
 
@@ -188,13 +188,16 @@ export default class AuthController {
     const {
       name: { givenName, familyName },
       id,
+      emails,
     } = profile;
 
     UserModel.findOneOrCreate(
-      { socialID: id },
+      { email: emails[0].value },
       {
         firstName: givenName,
         lastName: familyName,
+        email: emails[0].value,
+        password: id,
         socialID: id,
       },
       (err, existingUser) => {
@@ -223,6 +226,7 @@ export default class AuthController {
         firstName: name[0],
         lastName: name[1],
         email: emails[0].value,
+        password: id,
         socialID: id,
       },
       (err, existingUser) => {

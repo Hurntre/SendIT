@@ -31,6 +31,7 @@ describe('User Login', () => {
           'lastName',
           'email',
           'isAdmin',
+          'parcels',
           'phoneNumber',
           '__v',
         ]);
@@ -107,6 +108,7 @@ describe('User Login', () => {
           'lastName',
           'isAdmin',
           'email',
+          'parcels',
           'phoneNumber',
           '__v',
         ]);

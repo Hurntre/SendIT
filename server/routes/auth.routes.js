@@ -1,8 +1,9 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 import express from 'express';
 import passport from 'passport';
 import controllers from '../controllers';
 import middlewares from '../middlewares';
+import passportSetup from '../config/passportSetup';
 
 const authRoute = express.Router();
 
@@ -53,7 +54,11 @@ authRoute.post(
 authRoute.get(
   '/google',
   passport.authenticate('google', {
-    scope: ['profile'],
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email',
+      'https://www.googleapis.com/auth/user.phonenumbers.read',
+    ],
   })
 );
 
