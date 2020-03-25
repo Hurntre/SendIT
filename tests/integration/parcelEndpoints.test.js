@@ -5,19 +5,18 @@ import seeds from '../../server/db/seeders/seed';
 
 chai.use(chaiHttp);
 
-let loginToken;
-
 before(async () => {
   await seeds.parcelDeleteSeed();
   await seeds.parcelCreateSeed();
 });
 
+let loginToken;
 before('login user', done => {
   chai
     .request(app)
     .post('/api/v1/auth/login')
     .send({
-      email: 'email56@yahoo.com',
+      email: 'admin@yahoo.com',
       password: 'pAsSwOrD',
     })
     .end((err, res) => {
@@ -30,41 +29,222 @@ before('login user', done => {
 });
 
 describe('parcel endpoint', () => {
-  it('should fetch all parcels in parcel collection after login', done => {
-    chai
-      .request(app)
-      .get('/api/v1/parcel/parcels')
-      .set('authorization', `Bearer ${loginToken}`)
-      .end((err, res) => {
-        const { success, parcels } = res.body;
-        expect(res).to.have.status(200);
-        expect(success).to.equal(true);
-        expect(parcels).to.be.a('array');
-        expect(parcels.length).to.equal(2);
-        expect(parcels[0])
-          .to.be.an('object')
-          .include.keys(
-            'description',
-            'weight',
-            'pickUpDate',
-            'expectedDeliveryDate'
-          );
-        done();
-      });
-  });
+  const route = '/api/v1/parcels';
 
-  it('should throw an error when no user is logged in', done => {
-    chai
-      .request(app)
-      .get('/api/v1/parcel/parcels')
-      .end((err, res) => {
-        const {
-          errors: { body },
-        } = res.body;
-        expect(res).to.have.status(401);
-        expect(body).to.eql(['You are not authorized']);
-        expect(body).to.be.a('array');
-        done();
+  describe('GET requests', () => {
+    it('should fetch all parcels in parcel collection after login', done => {
+      chai
+        .request(app)
+        .get(route)
+        .set('authorization', `Bearer ${loginToken}`)
+        .end((err, res) => {
+          const { success, parcels } = res.body;
+          expect(res).to.have.status(200);
+          expect(success).to.equal(true);
+          expect(parcels).to.be.a('array');
+          expect(parcels.length).to.equal(2);
+          expect(parcels[0])
+            .to.be.an('object')
+            .include.keys(
+              'description',
+              'weight',
+              'pickUpDate',
+              'expectedDeliveryDate'
+            );
+          done();
+        });
+    });
+    it('should throw an error when no user is logged in', done => {
+      chai
+        .request(app)
+        .get(route)
+        .end((err, res) => {
+          const {
+            errors: { body },
+          } = res.body;
+          expect(res).to.have.status(401);
+          expect(body).to.eql(['You are not authorized']);
+          expect(body).to.be.a('array');
+          done();
+        });
+    });
+  });
+  describe('POST requests', () => {
+    describe('address validation', () => {
+      it('should post parcel', done => {
+        chai
+          .request(app)
+          .post(route)
+          .set('authorization', `Bearer ${loginToken}`)
+          .send({
+            description: 'An apple laptop',
+            weight: '3.0',
+            pickUpDate: Date.now() + 864000010,
+            receiverName: 'John Doe',
+            receiverPhoneNumber: '08012345678',
+            receiverAddress: 'university of ibadan, Ibadan, oyo state',
+          })
+          .end((err, res) => {
+            const { success, message } = res.body;
+            expect(res).to.have.status(200);
+            expect(success).to.equal(true);
+            expect(message).to.equal('new parcel created successfully');
+
+            done();
+          });
       });
+      it('should return an error due to invalid receiverAddress', done => {
+        chai
+          .request(app)
+          .post(route)
+          .set('authorization', `Bearer ${loginToken}`)
+          .send({
+            description: 'An apple laptop',
+            weight: '3.0',
+            pickUpDate: Date.now() + 864000010,
+            receiverName: 'John Doe',
+            receiverPhoneNumber: '08012345678',
+            receiverAddress: 'eahy',
+          })
+          .end((err, res) => {
+            const { success, error } = res.body;
+            expect(res).to.have.status(404);
+            expect(success).to.equal(false);
+            expect(error).to.equal('Address not found, enter a valid address');
+            done();
+          });
+      });
+    });
+
+    describe('authorization', () => {
+      it('should return an error when authorization is not in header', done => {
+        chai
+          .request(app)
+          .post(route)
+          .send({
+            description: 'An apple laptop',
+            weight: '3.0',
+            pickUpDate: Date.now(),
+            receiverName: 'John Doe',
+            receiverPhoneNumber: '08012345678',
+            receiverAddress: 'House NO, street, town, city, state',
+          })
+          .end((err, res) => {
+            const {
+              errors: { body },
+            } = res.body;
+            expect(res).to.have.status(401);
+            expect(body).to.be.a('array');
+            expect(body[0]).to.equal('You are not authorized');
+            done();
+          });
+      });
+    });
+
+    describe('parcel validation', () => {
+      it('should return an error due to missing parcel description', done => {
+        chai
+          .request(app)
+          .post(route)
+          .set('authorization', `Bearer ${loginToken}`)
+          .send({
+            weight: '3.0',
+            pickUpDate: Date.now() + 864000010,
+            receiverName: 'John Doe',
+            receiverPhoneNumber: '08012345678',
+            receiverAddress: 'House NO, street, town, city, state',
+          })
+          .end((err, res) => {
+            const { success, error } = res.body;
+            expect(res).to.have.status(400);
+            expect(success).to.equal(false);
+            expect(error).to.equal('description is required');
+            done();
+          });
+      });
+      it('should return an error due to missing parcel pickUpDate', done => {
+        chai
+          .request(app)
+          .post(route)
+          .set('authorization', `Bearer ${loginToken}`)
+          .send({
+            description: 'An apple laptop',
+            weight: '3.0',
+            receiverName: 'John Doe',
+            receiverPhoneNumber: '08012345678',
+            receiverAddress: 'House NO, street, town, city, state',
+          })
+          .end((err, res) => {
+            const { success, error } = res.body;
+            expect(res).to.have.status(400);
+            expect(success).to.equal(false);
+            expect(error).to.equal('pickUpDate is required');
+            done();
+          });
+      });
+      it('should return an error due to invalid parcel pickUpDate', done => {
+        chai
+          .request(app)
+          .post(route)
+          .set('authorization', `Bearer ${loginToken}`)
+          .send({
+            description: 'An apple laptop',
+            weight: '3.0',
+            pickUpDate: Date.now(),
+            receiverName: 'John Doe',
+            receiverPhoneNumber: '08012345678',
+            receiverAddress: 'House NO, street, town, city, state',
+          })
+          .end((err, res) => {
+            const { success, error } = res.body;
+            expect(res).to.have.status(400);
+            expect(success).to.equal(false);
+            expect(error).to.equal(
+              'pickUpdate date has to be to a day from now at least'
+            );
+            done();
+          });
+      });
+      it('should return an error due to missing parcel weight', done => {
+        chai
+          .request(app)
+          .post(route)
+          .set('authorization', `Bearer ${loginToken}`)
+          .send({
+            description: 'An apple laptop',
+            pickUpDate: Date.now() + 864000010,
+            receiverName: 'John Doe',
+            receiverPhoneNumber: '08012345678',
+            receiverAddress: 'House NO, street, town, city, state',
+          })
+          .end((err, res) => {
+            const { success, error } = res.body;
+            expect(res).to.have.status(400);
+            expect(success).to.equal(false);
+            expect(error).to.equal('weight is required');
+            done();
+          });
+      });
+      it('should return an error due to missing parcel receiverName', done => {
+        chai
+          .request(app)
+          .post(route)
+          .set('authorization', `Bearer ${loginToken}`)
+          .send({
+            description: 'An apple laptop',
+            weight: '3.0',
+            pickUpDate: Date.now() + 864000010,
+            receiverPhoneNumber: '08012345678',
+            receiverAddress: 'House NO, street, town, city, state',
+          })
+          .end((err, res) => {
+            const { success, error } = res.body;
+            expect(res).to.have.status(400);
+            expect(success).to.equal(false);
+            expect(error).to.equal('receiverName is required');
+            done();
+          });
+      });
+    });
   });
 });
