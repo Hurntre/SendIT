@@ -1,5 +1,6 @@
 /* eslint-disable require-jsdoc */
 import ParcelModel from '../db/models/parcel';
+import UserModel from '../db/models/user';
 
 /**
  *  @class ParcelController
@@ -12,6 +13,7 @@ export default class ParcelController {
    * @param {*} res
    * @returns {object} all parcel
    */
+
   static async getAllParcel(req, res) {
     try {
       const parcels = await ParcelModel.find({});
@@ -35,13 +37,30 @@ export default class ParcelController {
     }
   }
 
+  /**
+   * @method createParcel
+   * @description create a new parcel and associate it with user
+   * @param {*} req
+   * @param {*} res
+   * @returns {object} new parcel
+   */
+
   static async createParcel(req, res) {
+    const { _id, email } = req.user;
     const { body } = req;
+
     try {
-      await ParcelModel.create(body, (err, data) => {
-        res.status(200).json({
+      const foundUser = await UserModel.findOne({ email });
+      // using a spread operator to spread the body into same object with senderID
+
+      ParcelModel.create({ ...body, senderID: _id }).then(async parcel => {
+        foundUser.parcels.push(parcel);
+        await foundUser.save();
+
+        res.status(200).send({
           success: true,
-          data,
+          parcel,
+          message: 'new parcel created successfully',
         });
       });
     } catch (error) {

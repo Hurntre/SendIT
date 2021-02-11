@@ -2,7 +2,12 @@ import express from 'express';
 import controllers from '../controllers';
 import middlewares from '../middlewares';
 
-const { verifyToken, newParcelMiddlewares } = middlewares;
+const {
+  verifyToken,
+  newParcelValidation,
+  verifyPickUpDate,
+  verifyReceiverAddress,
+} = middlewares;
 
 const parcelRoute = express.Router();
 
@@ -10,15 +15,13 @@ const {
   parcelController: { getAllParcel, createParcel },
 } = controllers;
 
-const { newParcelValidation, bodyFillers } = newParcelMiddlewares;
-
-parcelRoute.get('/parcels', verifyToken, getAllParcel);
-
+parcelRoute.get('/', verifyToken, getAllParcel);
 parcelRoute.post(
-  '/parcels',
+  '/',
   verifyToken,
-  bodyFillers,
   newParcelValidation,
+  verifyPickUpDate,
+  verifyReceiverAddress,
   createParcel
 );
 

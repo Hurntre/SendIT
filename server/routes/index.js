@@ -10,6 +10,6 @@ import parcelRoute from './parcel.routes';
 const router = express.Router();
 
 router.use('/auth', authRoute);
-router.use('/parcel', parcelRoute);
+router.use('/parcels', parcelRoute);
 
 export default router;
