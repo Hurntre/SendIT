@@ -30,11 +30,12 @@ body {
   color: black;
 }
 
-/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+/* When the screen is less than 600 pixels wide, pad the navbar */
 @media screen and (max-width: 600px) {
   .navbar {
     justify-content: space-between;
     padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -80,12 +81,23 @@ body {
 fieldset {
   border: none;
 }
+
+.innerFieldset {
+  margin: 20px 0;
+  padding: 0px;
+}
+
 legend {
   font-size: 20.8px;
   font-weight: 700;
   text-align: left;
   margin-left: 27px;
   color: steelblue;
+}
+
+form legend {
+  margin-left: 0px;
+  text-align: center;
 }
 
 @media screen and (max-width: 720px) {
@@ -114,14 +126,16 @@ form input {
 }
 
 form input,
-form button {
+form button,
+div button {
   line-height: 18px;
   padding: 0.625rem;
   border-radius: 2px;
   margin-top: 15px;
 }
 
-form button {
+form button,
+div button {
   background: steelblue;
   color: white;
   width: 200px;
@@ -214,6 +228,23 @@ button a {
 #loginButtonLink a {
   color: steelblue;
 }
-#signUpButtonLink a {
+#signUpButtonLink a,
+button a {
   color: white;
+}
+
+/* All parcel view page */
+.profile-preview {
+  padding: 10px 16px;
+  margin: 20px auto;
+  border-bottom: 1px solid #fafafa;
+  max-width: 600px;
+}
+.profile-preview:hover {
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+}
+.profile-preview h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
 }

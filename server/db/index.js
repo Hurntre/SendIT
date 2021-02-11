@@ -10,7 +10,10 @@ const TEST_MONGO_URI = process.env.TEST_MONGO_URI;
 
 const connect = () =>
   new Promise((resolve, reject) => {
-    if (process.env.NODE_ENV === 'test') {
+    if (
+      process.env.NODE_ENV === 'test' ||
+      process.env.NODE_ENV === 'development'
+    ) {
       mongoose
         .connect(TEST_MONGO_URI, {
           useNewUrlParser: true,

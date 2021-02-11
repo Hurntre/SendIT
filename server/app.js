@@ -10,7 +10,6 @@ import cookieSession from 'cookie-session';
 
 // for path resolution
 import path from 'path';
-import bodyParser from 'body-parser';
 
 // local imports
 import routes from './routes/index';
@@ -18,7 +17,7 @@ import db from './db/index';
 import swaggerSpec from '../documentation/swagger.json';
 import middlewares from './middlewares';
 
-// variables
+// helps load environment variables from .env file to process.env
 dotenv.config();
 const baseUrl = '/api/v1';
 const port = process.env.PORT || 3000;
@@ -29,8 +28,11 @@ const { trimmerMiddleware } = middlewares;
 // initialize express server
 const app = express();
 
-// Express inbuilt body parser
+// Express inbuilt body parser to read JSON and Access form data
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Thirdparty Middleware initialization
 app.use(trimmerMiddleware);
 app.use(cors());
 app.use(compression()); // Compress all routes
@@ -49,8 +51,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// bodyParser for access to req body
-app.use(bodyParser.urlencoded({ extended: true }));
 // allows the serving of custom files i.e. css and html
 app.use(express.static('UI'));
 

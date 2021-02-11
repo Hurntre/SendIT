@@ -1,4 +1,4 @@
-import Authenticate from './auth';
+import authHelper from './auth';
 
 const verifyAuthHeader = req => {
   try {
@@ -6,7 +6,7 @@ const verifyAuthHeader = req => {
       return { error: 'error' };
     }
     const token = req.headers.authorization.split(' ')[1];
-    const payload = Authenticate.decode(token);
+    const payload = authHelper.decode(token);
 
     return payload;
   } catch (err) {

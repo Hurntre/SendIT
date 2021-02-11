@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import ParcelModel from '../db/models/parcel';
 
 /**
@@ -25,6 +26,23 @@ export default class ParcelController {
         success: true,
         message: 'All parcels retrieved successfully',
         parcels,
+      });
+    } catch (error) {
+      return res.status(500).send({
+        success: false,
+        error,
+      });
+    }
+  }
+
+  static async createParcel(req, res) {
+    const { body } = req;
+    try {
+      await ParcelModel.create(body, (err, data) => {
+        res.status(200).json({
+          success: true,
+          data,
+        });
       });
     } catch (error) {
       return res.status(500).send({

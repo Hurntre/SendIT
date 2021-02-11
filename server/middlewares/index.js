@@ -6,6 +6,7 @@ import loginValidation from './loginValidation';
 import resetValidations from './resetValidation';
 import verifyToken from './isLoggedIn';
 import checkUserRole from './checkUserRole';
+import newParcelMiddlewares from './newParcelMiddlewares';
 
 export default {
   trimmerMiddleware,
@@ -16,4 +17,5 @@ export default {
   resetValidations,
   verifyToken,
   checkUserRole,
+  newParcelMiddlewares,
 };
