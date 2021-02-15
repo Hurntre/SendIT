@@ -9,7 +9,7 @@ import verifyToken from './isLoggedIn';
 import verifyPickUpDate from './pickUpDateValidation';
 import verifyReceiverAddress from './addressValidation';
 import checkUserRole from './checkUserRole';
-import newParcelMiddlewares from './newParcelMiddlewares';
+import deliveryDateSetter from './deliveryDateSetter';
 
 export default {
   trimmerMiddleware,
@@ -23,5 +23,5 @@ export default {
   verifyPickUpDate,
   verifyReceiverAddress,
   checkUserRole,
-  newParcelMiddlewares,
+  deliveryDateSetter,
 };

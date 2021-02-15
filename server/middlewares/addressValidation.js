@@ -10,7 +10,7 @@ const env = process.env.NODE_ENV;
 const verifyReceiverAddress = (req, res, next) => {
   const { receiverAddress } = req.body;
 
-  if (env === 'test' || env === 'developement') {
+  if (env === 'test' || env === 'development') {
     if (receiverAddress && receiverAddress.length > 4) {
       next();
     } else {

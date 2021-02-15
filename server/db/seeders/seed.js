@@ -34,14 +34,14 @@ const parcelDeleteSeed = async () => {
 const parcelCreateSeed = async () => {
   await ParcelModel.insertMany([
     {
-      description: 'A White stockie Esbee footwear',
+      description: 'A White Nike Airforce 1',
       weight: 1.15,
       pickUpDate: Date.now() + 1,
       expectedDeliveryDate: Date.now() + 8,
-      pickUpLocation: 'Abuja',
-      status: 'Pickup Pending',
-      receiverName: 'Adefolaju Ariyo',
-      receiverPhoneNumber: '08140159932',
+      pickUpAddress: 'No 5, National Stadium Crescent, Abuja town, Florida',
+      status: 'Pickup Requested',
+      receiverName: 'Paul Smith',
+      receiverPhoneNumber: '08111111111',
       receiverAddress: 'your house number, street, area, town, city, state.',
     },
     {
@@ -50,9 +50,10 @@ const parcelCreateSeed = async () => {
       pickUpDate: Date.now() + 1,
       expectedDeliveryDate: Date.now() + 8,
       status: 'Delivered',
-      pickUpLocation: 'Abuja',
-      receiverName: 'Adefolaju Ariyo',
-      receiverPhoneNumber: '08140159932',
+      pickUpAddress:
+        'No 99, middle of nowhere street, ghost town, no state, lost country',
+      receiverName: 'John Doe',
+      receiverPhoneNumber: '02222222222',
       receiverAddress: 'your house number, street, area, town, city, state.',
     },
   ]);

@@ -22,10 +22,12 @@ const emailSender = async mailOptions => {
         subject: mailOptions.subject,
         text: mailOptions.text,
       });
-
+      // eslint-disable-next-line no-console
       console.log('Message sent:%s', info.messageId);
+      // eslint-disable-next-line no-console
       console.log('Preview URL:%s', nodeMailer.getTestMessageUrl(info));
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }

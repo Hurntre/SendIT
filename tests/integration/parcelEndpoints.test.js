@@ -77,12 +77,15 @@ describe('parcel endpoint', () => {
           .post(route)
           .set('authorization', `Bearer ${loginToken}`)
           .send({
-            description: 'An apple laptop',
-            weight: '3.0',
-            pickUpDate: Date.now() + 864000010,
-            receiverName: 'John Doe',
-            receiverPhoneNumber: '08012345678',
-            receiverAddress: 'university of ibadan, Ibadan, oyo state',
+            description: 'A White Nike Airforce 1',
+            weight: 1.15,
+            pickUpDate: Date.now() + 86500000,
+            pickUpAddress:
+              'No 5, National Stadium Crescent, Abuja town, Florida',
+            receiverName: 'Paul Smith',
+            receiverPhoneNumber: '08111111111',
+            receiverAddress:
+              'your house number, street, area, town, city, state.',
           })
           .end((err, res) => {
             const { success, message } = res.body;
@@ -99,12 +102,14 @@ describe('parcel endpoint', () => {
           .post(route)
           .set('authorization', `Bearer ${loginToken}`)
           .send({
-            description: 'An apple laptop',
-            weight: '3.0',
-            pickUpDate: Date.now() + 864000010,
-            receiverName: 'John Doe',
-            receiverPhoneNumber: '08012345678',
-            receiverAddress: 'eahy',
+            description: 'A White Nike Airforce 1',
+            weight: 1.15,
+            pickUpDate: Date.now() + 86500000,
+            pickUpAddress:
+              'No 5, National Stadium Crescent, Abuja town, Florida',
+            receiverName: 'Paul Smith',
+            receiverPhoneNumber: '08111111111',
+            receiverAddress: 'your',
           })
           .end((err, res) => {
             const { success, error } = res.body;
@@ -188,12 +193,15 @@ describe('parcel endpoint', () => {
           .post(route)
           .set('authorization', `Bearer ${loginToken}`)
           .send({
-            description: 'An apple laptop',
-            weight: '3.0',
+            description: 'A White Nike Airforce 1',
+            weight: 1.15,
             pickUpDate: Date.now(),
-            receiverName: 'John Doe',
-            receiverPhoneNumber: '08012345678',
-            receiverAddress: 'House NO, street, town, city, state',
+            pickUpAddress:
+              'No 5, National Stadium Crescent, Abuja town, Florida',
+            receiverName: 'Paul Smith',
+            receiverPhoneNumber: '08111111111',
+            receiverAddress:
+              'your house number, street, area, town, city, state.',
           })
           .end((err, res) => {
             const { success, error } = res.body;
@@ -231,11 +239,14 @@ describe('parcel endpoint', () => {
           .post(route)
           .set('authorization', `Bearer ${loginToken}`)
           .send({
-            description: 'An apple laptop',
-            weight: '3.0',
-            pickUpDate: Date.now() + 864000010,
-            receiverPhoneNumber: '08012345678',
-            receiverAddress: 'House NO, street, town, city, state',
+            description: 'A White Nike Airforce 1',
+            weight: 1.15,
+            pickUpDate: Date.now() + 86500000,
+            pickUpAddress:
+              'No 5, National Stadium Crescent, Abuja town, Florida',
+            receiverPhoneNumber: '08111111111',
+            receiverAddress:
+              'your house number, street, area, town, city, state.',
           })
           .end((err, res) => {
             const { success, error } = res.body;

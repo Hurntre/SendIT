@@ -6,9 +6,9 @@ import seeds from '../../server/db/seeders/seed';
 chai.use(chaiHttp);
 
 // should clear and seed db where needed
-before(() => {
-  seeds.usersDeleteSeed();
-  seeds.userCreateSeed();
+before(async () => {
+  await seeds.usersDeleteSeed();
+  await seeds.userCreateSeed();
 });
 
 describe('User Login', () => {

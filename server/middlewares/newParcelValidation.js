@@ -5,8 +5,13 @@ const newParcelValidation = (req, res, next) => {
   const { body } = req;
   const schema = Joi.object({
     description: Joi.string().required(),
-    weight: Joi.string().required(),
+    status: Joi.string(),
+    weight: Joi.number().required(),
     pickUpDate: Joi.date().required(),
+    expectedDeliveryDate: Joi.date(),
+    dateDelivered: Joi.string(),
+    senderID: Joi.string(),
+    pickUpAddress: Joi.string().required(),
     receiverName: Joi.string().required(),
     receiverPhoneNumber: Joi.string()
       .required()
@@ -19,6 +24,7 @@ const newParcelValidation = (req, res, next) => {
   if (error) {
     const { message } = error.details[0];
     const formatedMessage = joiFormater(message);
+
     return res.status(400).send({
       success: false,
       error: formatedMessage,

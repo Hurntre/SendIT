@@ -7,6 +7,7 @@ const {
   newParcelValidation,
   verifyPickUpDate,
   verifyReceiverAddress,
+  deliveryDateSetter,
 } = middlewares;
 
 const parcelRoute = express.Router();
@@ -22,6 +23,7 @@ parcelRoute.post(
   newParcelValidation,
   verifyPickUpDate,
   verifyReceiverAddress,
+  deliveryDateSetter,
   createParcel
 );
 

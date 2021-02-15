@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 // parcel SCHEMA
 const parcelSchema = new Schema({
   description: { type: String, required: true },
-  status: { type: String, required: true },
+  status: { type: String, default: 'Pickup Requested' },
   weight: { type: Number, required: true },
   pickUpDate: { type: Date, required: true },
   expectedDeliveryDate: { type: Date, required: true },
@@ -13,10 +13,10 @@ const parcelSchema = new Schema({
   senderID: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Users',
     },
   ],
-  pickUpLocation: { type: String, required: true },
+  pickUpAddress: { type: String, required: true },
   receiverName: { type: String, required: true },
   receiverPhoneNumber: { type: Number, required: true },
   receiverAddress: { type: String, required: true },
