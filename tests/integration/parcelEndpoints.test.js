@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../server/app';
@@ -11,6 +12,7 @@ before(async () => {
 });
 
 let loginToken;
+let parcelID;
 before('login user', done => {
   chai
     .request(app)
@@ -39,6 +41,7 @@ describe('parcel endpoint', () => {
         .set('authorization', `Bearer ${loginToken}`)
         .end((err, res) => {
           const { success, parcels } = res.body;
+          parcelID = parcels[0]._id;
           expect(res).to.have.status(200);
           expect(success).to.equal(true);
           expect(parcels).to.be.a('array');
@@ -65,6 +68,34 @@ describe('parcel endpoint', () => {
           expect(res).to.have.status(401);
           expect(body).to.eql(['You are not authorized']);
           expect(body).to.be.a('array');
+          done();
+        });
+    });
+
+    it('should fetch single parcel from collection by id', done => {
+      chai
+        .request(app)
+        .get(`${route}/${parcelID}`)
+        .set('authorization', `Bearer ${loginToken}`)
+        .end((err, res) => {
+          const { success, parcel } = res.body;
+          expect(res).to.have.status(200);
+          expect(success).to.equal(true);
+          expect(parcel).to.be.a('object');
+          done();
+        });
+    });
+
+    it('should fail to fetch single parcel due to invalid parcel ID', done => {
+      chai
+        .request(app)
+        .get(`${route}/767a5666aea84a04be6ee7e9`)
+        .set('authorization', `Bearer ${loginToken}`)
+        .end((err, res) => {
+          const { success, error } = res.body;
+          expect(res).to.have.status(404);
+          expect(success).to.equal(false);
+          expect(error).to.eql('No parcel with such ID exists in DB');
           done();
         });
     });

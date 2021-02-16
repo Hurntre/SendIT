@@ -13,7 +13,7 @@ const {
 const parcelRoute = express.Router();
 
 const {
-  parcelController: { getAllParcel, createParcel },
+  parcelController: { getAllParcel, createParcel, getParcelByID },
 } = controllers;
 
 parcelRoute.get('/', verifyToken, getAllParcel);
@@ -26,5 +26,5 @@ parcelRoute.post(
   deliveryDateSetter,
   createParcel
 );
-
+parcelRoute.get('/:parcelID', verifyToken, getParcelByID);
 export default parcelRoute;

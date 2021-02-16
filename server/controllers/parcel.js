@@ -70,4 +70,28 @@ export default class ParcelController {
       });
     }
   }
+
+  static async getParcelByID(req, res) {
+    try {
+      const id = req.params.parcelID;
+      const parcel = await ParcelModel.findOne({ _id: id });
+      if (!parcel) {
+        return res.status(404).send({
+          success: false,
+          error: 'No parcel with such ID exists in DB',
+        });
+      }
+
+      return res.status(200).send({
+        success: true,
+        message: 'Parcel retrieved successfully',
+        parcel,
+      });
+    } catch (error) {
+      res.status(500).send({
+        success: false,
+        error,
+      });
+    }
+  }
 }
