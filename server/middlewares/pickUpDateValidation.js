@@ -13,11 +13,12 @@ const verifyPickUpDate = (req, res, next) => {
 
   const presentDate = Date.now();
   const timeDifference = pickUpDate - presentDate;
+  const requiredTimeDifference = 86400000;
 
-  if (timeDifference < 86400000) {
+  if (timeDifference < requiredTimeDifference) {
     return res.status(400).json({
       success: false,
-      error: 'pickUpdate date has to be to a day from now at least',
+      error: 'pickup date has to be at least a day from now',
     });
   }
   return next();

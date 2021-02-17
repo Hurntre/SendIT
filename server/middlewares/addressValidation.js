@@ -10,13 +10,13 @@ const env = process.env.NODE_ENV;
 const verifyReceiverAddress = (req, res, next) => {
   const { receiverAddress } = req.body;
 
-  if (env === 'test' || env === 'development') {
+  if (env === 'test') {
     if (receiverAddress && receiverAddress.length > 4) {
       next();
     } else {
       return res.status(404).json({
         success: false,
-        error: 'Address not found, enter a valid address',
+        error: 'Invalid address',
       });
     }
   } else {
