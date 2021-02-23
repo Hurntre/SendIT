@@ -36,8 +36,8 @@ const parcelCreateSeed = async () => {
     {
       description: 'A White Nike Airforce 1',
       weight: 1.15,
-      pickUpDate: Date.now() + 1,
-      expectedDeliveryDate: Date.now() + 8,
+      pickUpDate: new Date(Date.now() + 86400000),
+      expectedDeliveryDate: Date.now() + 6912000000,
       pickUpAddress: 'No 5, National Stadium Crescent, Abuja town, Florida',
       status: 'requested',
       receiverName: 'Paul Smith',
@@ -47,8 +47,8 @@ const parcelCreateSeed = async () => {
     {
       description: 'An Agbajo Irele footwear size 47',
       weight: 0.75,
-      pickUpDate: Date.now() + 1,
-      expectedDeliveryDate: Date.now() + 8,
+      pickUpDate: new Date(Date.now() + 86400000),
+      expectedDeliveryDate: Date.now() + 6912000000,
       status: 'Delivered',
       pickUpAddress:
         'No 99, middle of nowhere street, ghost town, no state, lost country',

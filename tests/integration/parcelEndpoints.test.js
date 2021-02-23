@@ -99,7 +99,7 @@ describe('parcel endpoints', () => {
         .send({
           description: 'A White Nike Airforce 1',
           weight: 1.15,
-          pickUpDate: Date.now() + 86500000,
+          pickUpDate: new Date(Date.now() + 86500000),
           pickUpAddress: 'No 5, National Stadium Crescent, Abuja town, Florida',
           receiverName: 'Paul Smith',
           receiverPhoneNumber: '08111111111',
@@ -123,7 +123,7 @@ describe('parcel endpoints', () => {
         .send({
           description: 'A White Nike Airforce 1',
           weight: 1.15,
-          pickUpDate: Date.now() + 86500000,
+          pickUpDate: new Date(Date.now() + 86500000),
           pickUpAddress: 'No 5, National Stadium Crescent, Abuja town, Florida',
           receiverName: 'Paul Smith',
           receiverPhoneNumber: '08111111111',
@@ -145,7 +145,7 @@ describe('parcel endpoints', () => {
         .send({
           description: 'An apple laptop',
           weight: '3.0',
-          pickUpDate: Date.now(),
+          pickUpDate: new Date(Date.now() + 86500000),
           receiverName: 'John Doe',
           receiverPhoneNumber: '08012345678',
           receiverAddress: 'House NO, street, town, city, state',
@@ -168,7 +168,7 @@ describe('parcel endpoints', () => {
         .set('authorization', `Bearer ${loginToken}`)
         .send({
           weight: '3.0',
-          pickUpDate: Date.now() + 864000010,
+          pickUpDate: new Date(Date.now() + 86500000),
           receiverName: 'John Doe',
           receiverPhoneNumber: '08012345678',
           receiverAddress: 'House NO, street, town, city, state',
@@ -209,7 +209,7 @@ describe('parcel endpoints', () => {
         .send({
           description: 'A White Nike Airforce 1',
           weight: 1.15,
-          pickUpDate: Date.now(),
+          pickUpDate: new Date(Date.now()),
           pickUpAddress: 'No 5, National Stadium Crescent, Abuja town, Florida',
           receiverName: 'Paul Smith',
           receiverPhoneNumber: '08111111111',
@@ -233,7 +233,7 @@ describe('parcel endpoints', () => {
         .set('authorization', `Bearer ${loginToken}`)
         .send({
           description: 'An apple laptop',
-          pickUpDate: Date.now() + 864000010,
+          pickUpDate: new Date(Date.now() + 86500000),
           receiverName: 'John Doe',
           receiverPhoneNumber: '08012345678',
           receiverAddress: 'House NO, street, town, city, state',
@@ -254,7 +254,7 @@ describe('parcel endpoints', () => {
         .send({
           description: 'A White Nike Airforce 1',
           weight: 1.15,
-          pickUpDate: Date.now() + 86500000,
+          pickUpDate: new Date(Date.now() + 86500000),
           pickUpAddress: 'No 5, National Stadium Crescent, Abuja town, Florida',
           receiverPhoneNumber: '08111111111',
           receiverAddress:
