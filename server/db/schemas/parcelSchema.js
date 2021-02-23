@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 // parcel SCHEMA
 const parcelSchema = new Schema({
   description: { type: String, required: true },
-  status: { type: String, default: 'Requested' },
+  status: { type: String, default: 'requested' },
   weight: { type: Number, required: true },
   pickUpDate: { type: Date, required: true },
   expectedDeliveryDate: { type: Date, required: true },

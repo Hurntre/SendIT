@@ -4,19 +4,28 @@ import joiFormater from '../helpers/joi-formatter';
 const newParcelValidation = (req, res, next) => {
   const { body } = req;
   const schema = Joi.object({
-    description: Joi.string().required(),
+    description: Joi.string()
+      .trim()
+      .required(),
     status: Joi.string(),
     weight: Joi.number().required(),
     pickUpDate: Joi.date().required(),
-    expectedDeliveryDate: Joi.date(),
+    expectedDeliveryDate: Joi.date().required(),
     dateDelivered: Joi.string(),
     senderID: Joi.string(),
-    pickUpAddress: Joi.string().required(),
-    receiverName: Joi.string().required(),
+    pickUpAddress: Joi.string()
+      .trim()
+      .required(),
+    receiverName: Joi.string()
+      .trim()
+      .required(),
     receiverPhoneNumber: Joi.string()
+      .trim()
       .required()
       .max(11),
-    receiverAddress: Joi.string().required(),
+    receiverAddress: Joi.string()
+      .trim()
+      .required(),
   });
 
   const { error } = schema.validate(body);

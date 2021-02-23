@@ -32,7 +32,6 @@ describe('User Creation', () => {
           'lastName',
           'isAdmin',
           'email',
-          'parcels',
           'phoneNumber',
           '__v',
         ]);
@@ -125,7 +124,6 @@ describe('User Creation', () => {
           'lastName',
           'isAdmin',
           'email',
-          'parcels',
           'phoneNumber',
           '__v',
         ]);

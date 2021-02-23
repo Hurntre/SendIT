@@ -39,6 +39,15 @@ describe('parcel endpoints', () => {
         .set('authorization', `Bearer ${loginToken}`)
         .end((err, res) => {
           const { success, parcels } = res.body;
+          const {
+            description,
+            weight,
+            status,
+            pickUpAddress,
+            receiverName,
+            receiverPhoneNumber,
+            receiverAddress,
+          } = parcels[0];
           expect(res).to.have.status(200);
           expect(success).to.equal(true);
           expect(parcels).to.be.a('array');
@@ -51,6 +60,18 @@ describe('parcel endpoints', () => {
               'pickUpDate',
               'expectedDeliveryDate'
             );
+          expect(description).to.equal('A White Nike Airforce 1');
+          expect(weight).to.equal(1.15);
+          expect(status).to.equal('requested');
+          expect(pickUpAddress).to.equal(
+            'No 5, National Stadium Crescent, Abuja town, Florida'
+          );
+          expect(receiverName).to.equal('Paul Smith');
+          expect(receiverPhoneNumber).to.equal(8111111111);
+          expect(receiverAddress).to.equal(
+            'your house number, street, area, town, city, state.'
+          );
+
           done();
         });
     });

@@ -10,10 +10,11 @@ userSchema.pre('validate', async function hashIt() {
   }
 });
 
-// to prevent the printing of a user's password
+// to prevent the printing of a user's password and parcels
 userSchema.methods.toJSON = function() {
   const userObject = this.toObject();
   delete userObject.password;
+  delete userObject.parcels;
   return userObject;
 };
 

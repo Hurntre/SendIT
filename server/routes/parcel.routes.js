@@ -20,10 +20,10 @@ parcelRoute.get('/', verifyToken, getAllParcel);
 parcelRoute.post(
   '/',
   verifyToken,
+  deliveryDateSetter,
   newParcelValidation,
   verifyPickUpDate,
   verifyReceiverAddress,
-  deliveryDateSetter,
   createParcel
 );
 

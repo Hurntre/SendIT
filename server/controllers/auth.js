@@ -22,6 +22,10 @@ export default class AuthController {
    */
   static async signUpController(req, res) {
     const { body } = req;
+
+    const userEmail = body.email;
+    body.email = userEmail.toLowerCase();
+
     try {
       UserModel.create(body, (err, data) => {
         const { _id, email, isAdmin } = data;
@@ -43,8 +47,9 @@ export default class AuthController {
 
   static async loginController(req, res) {
     const { email, password } = req.body;
+    const convertedEmail = email.toLowerCase();
     const user = await UserModel.findOne({
-      email,
+      email: convertedEmail,
     });
     if (!user) {
       return res.status(400).send({
