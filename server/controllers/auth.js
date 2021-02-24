@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable require-jsdoc */
 import UserModel from '../db/models/user';
 import authHelper from '../helpers/auth';
 import emailSender from '../config/emailService';

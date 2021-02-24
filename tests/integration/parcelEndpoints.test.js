@@ -32,7 +32,7 @@ describe('parcel endpoints', () => {
   const route = '/api/v1/parcels';
 
   describe('Parcel GET requests', () => {
-    it('should fetch all parcels in parcel collection after login', done => {
+    it('should fetch all parcels in parcel collection', done => {
       chai
         .request(app)
         .get(route)
@@ -202,6 +202,29 @@ describe('parcel endpoints', () => {
         });
     });
     it('should return an error due to invalid parcel pickUpDate', done => {
+      chai
+        .request(app)
+        .post(route)
+        .set('authorization', `Bearer ${loginToken}`)
+        .send({
+          description: 'A White Nike Airforce 1',
+          weight: 1.15,
+          pickUpDate: 86500000,
+          pickUpAddress: 'No 5, National Stadium Crescent, Abuja town, Florida',
+          receiverName: 'Paul Smith',
+          receiverPhoneNumber: '08111111111',
+          receiverAddress:
+            'your house number, street, area, town, city, state.',
+        })
+        .end((err, res) => {
+          const { success, error } = res.body;
+          expect(res).to.have.status(400);
+          expect(success).to.equal(false);
+          expect(error).to.equal('wrong type of date');
+          done();
+        });
+    });
+    it('should return an error due to invalid parcel pickUpDate type', done => {
       chai
         .request(app)
         .post(route)

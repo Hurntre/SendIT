@@ -1,4 +1,3 @@
-/* eslint-disable require-jsdoc */
 import ParcelModel from '../db/models/parcel';
 import UserModel from '../db/models/user';
 
