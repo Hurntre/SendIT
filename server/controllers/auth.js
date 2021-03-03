@@ -42,6 +42,13 @@ export default class AuthController {
       });
     }
   }
+  /**
+   * @method loginUser
+   * @description logs in a user with their email and password
+   * @param {*} req
+   * @param {*} res
+   * @returns {object} logged in user without parcel property
+   */
 
   static async loginController(req, res) {
     const { email, password } = req.body;
@@ -74,6 +81,13 @@ export default class AuthController {
       user,
     });
   }
+  /**
+   * @method passwordResetRequest
+   * @description creates unique password reset link using user id and email to create token
+   * @param {*} req
+   * @param {*} res
+   * @returns {object} token created
+   */
 
   static async passwordResetRequest(req, res) {
     try {
@@ -114,9 +128,15 @@ export default class AuthController {
       });
     }
   }
+  /**
+   * @method password reset page request
+   * @description validate password reset token  and sends a result on success or not
+   * @param {*} req
+   * @param {*} res
+   * @route GET api/v1/auth/reset/:token
+   * @returns success message
+   */
 
-  // @route GET api/v1/auth/reset/:token
-  // @desc validate password reset token  and sends a result on success or not
   static async passwordResetPageRequest(req, res) {
     try {
       const user = await UserModel.findOne({
@@ -140,9 +160,15 @@ export default class AuthController {
       });
     }
   }
+  /**
+   * @method reset password
+   * @description validate password reset token and updates user password with hashed new password. then sets the token property to undefined
+   * @param {*} req
+   * @param {*} res
+   * @route POST api/v1/auth/reset/:token
+   * @returns {object} user with hashed updated password
+   */
 
-  // @route POST api/v1/auth/reset/:token
-  // @desc reset password
   static async updatePassword(req, res) {
     const user = await UserModel.findOne({
       resetPasswordToken: req.params.token,
@@ -173,6 +199,13 @@ export default class AuthController {
       });
     }
   }
+  /**
+   * @method social redirect
+   * @description resolves the social login route.
+   * @param {*} req
+   * @param {*} res
+   * @returns {object} success message with social user firstname and lastname
+   */
 
   static async socialRedirect(req, res) {
     const { firstName, lastName } = req.user;
@@ -181,6 +214,12 @@ export default class AuthController {
       message: `Social user ${firstName} ${lastName} is logged in`,
     });
   }
+  /**
+   * @method google social login
+   * @description checks if google user exists in app or not. create new user if not
+   * @param {*} req
+   * @param {*} res
+   */
 
   static async googlePassportCallback(
     accessToken,
@@ -213,6 +252,12 @@ export default class AuthController {
       }
     );
   }
+  /**
+   * @method github social login
+   * @description checks if githubuser exists in app or not. create new user if not
+   * @param {*} req
+   * @param {*} res
+   */
 
   static async githubPassportCallback(
     accessToken,

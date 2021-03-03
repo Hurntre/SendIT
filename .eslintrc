@@ -33,7 +33,7 @@
         }
       ],
       "require-jsdoc": [
-        "off",
+        "warn",
         {
           "require": {
             "FunctionDeclaration": true,
