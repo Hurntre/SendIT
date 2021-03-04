@@ -19,7 +19,6 @@ export default class UserController {
     const { userID } = req.params;
 
     try {
-      console.log(userID);
       const parcels = await ParcelModel.find({ senderID: userID });
       if (!parcels) {
         return res.status(400).send({
