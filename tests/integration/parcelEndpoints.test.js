@@ -42,6 +42,7 @@ describe('parcel endpoint', () => {
         .end((err, res) => {
           const { success, parcels } = res.body;
           parcelID = parcels[0]._id;
+          console.log(parcels);
           expect(res).to.have.status(200);
           expect(success).to.equal(true);
           expect(parcels).to.be.a('array');
