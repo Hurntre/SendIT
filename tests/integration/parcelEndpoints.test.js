@@ -103,8 +103,7 @@ describe('parcel endpoints', () => {
           pickUpAddress: 'No 5, National Stadium Crescent, Abuja town, Florida',
           receiverName: 'Paul Smith',
           receiverPhoneNumber: '08111111111',
-          receiverAddress:
-            'your house number, street, area, town, city, state.',
+          receiverAddress: 'university of Ibadan, Ibadan, Oyo state',
         })
         .end((err, res) => {
           const { success, message } = res.body;

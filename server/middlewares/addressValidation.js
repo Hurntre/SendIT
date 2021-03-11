@@ -1,4 +1,4 @@
-import googleMaps from '@google/maps';
+import geocoder from '../helpers/geocoder';
 /**
  * @method verifyReceiverAddress
  * @description Verifies the receiver address provided by the user
@@ -7,7 +7,9 @@ import googleMaps from '@google/maps';
  * @returns {*} - JSON response object
  */
 const env = process.env.NODE_ENV;
-const verifyReceiverAddress = (req, res, next) => {
+const googleAPIkey = process.env.GOOGLE_API;
+
+const verifyReceiverAddress = async (req, res, next) => {
   const { receiverAddress } = req.body;
 
   if (env === 'test') {
@@ -20,32 +22,23 @@ const verifyReceiverAddress = (req, res, next) => {
       });
     }
   } else {
-    const googleMapsClient = googleMaps.createClient({
-      key: process.env.googleAPI,
-      Promise,
-    });
+    try {
+      const response = await geocoder(receiverAddress, googleAPIkey);
 
-    googleMapsClient
-      .places({
-        query: receiverAddress,
-      })
-      .asPromise()
-      .then(response => {
-        if (response.json.results.length > 0) {
-          next();
-        } else {
-          return res.status(404).json({
-            success: false,
-            error: 'Address not found, enter a valid address',
-          });
-        }
-      })
-      .catch(err => {
-        return res.status(500).json({
+      if (response.data.results.length === 0) {
+        return res.status(404).json({
           success: false,
-          error: err,
+          error: 'Invalid address',
         });
+      }
+      console.log(response.data.results);
+      next();
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error,
       });
+    }
   }
 };
 
