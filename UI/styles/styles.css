@@ -1,0 +1,250 @@
+body {
+  margin: 0;
+  border: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 50px;
+  line-height: 50px;
+  background: steelblue;
+  color: white;
+  overflow: hidden;
+  font-size: 14.5px;
+  position: relative;
+  z-index: 1000;
+}
+
+.navbar a {
+  text-align: center;
+  text-decoration: none;
+  padding: 0px 10px;
+  display: inline-block;
+  color: white;
+}
+
+.navbar a:hover {
+  color: black;
+}
+
+/* When the screen is less than 600 pixels wide, pad the navbar */
+@media screen and (max-width: 600px) {
+  .navbar {
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* form */
+#mainView {
+  display: flex;
+  height: 100vh;
+  margin-top: -50px;
+}
+
+#formSide {
+  width: 40%;
+}
+
+#formPageImage {
+  width: 60%;
+  background-image: url(./Images/photo.jpg);
+  background-size: cover;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 720px) {
+  #formPageImage {
+    width: 40%;
+  }
+  #formSide {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  #formPageImage {
+    display: none;
+  }
+  #formSide {
+    width: 100%;
+  }
+}
+
+#formArea {
+  width: 450px;
+  margin: 100px auto;
+}
+fieldset {
+  border: none;
+}
+
+.innerFieldset {
+  margin: 20px 0;
+  padding: 0px;
+}
+
+legend {
+  font-size: 20.8px;
+  font-weight: 700;
+  text-align: left;
+  margin-left: 27px;
+  color: steelblue;
+}
+
+form legend {
+  margin-left: 0px;
+  text-align: center;
+}
+
+@media screen and (max-width: 720px) {
+  #formArea {
+    margin-top: 150px;
+  }
+  legend {
+    font-size: 20.8px;
+    text-align: center;
+  }
+}
+
+form {
+  margin: 30px;
+}
+
+form input {
+  display: block;
+  width: 350px;
+  margin-bottom: 15px;
+  height: 18px;
+  font-size: 13px;
+  border: 1px solid #cacaca;
+  cursor: text;
+  background: #fafafa;
+}
+
+form input,
+form button,
+div button {
+  line-height: 18px;
+  padding: 0.625rem;
+  border-radius: 2px;
+  margin-top: 15px;
+}
+
+form button,
+div button {
+  background: steelblue;
+  color: white;
+  width: 200px;
+  font-size: 12px;
+  border: none;
+}
+
+form button.login-button {
+  width: 100px;
+}
+
+label {
+  display: block;
+  font-size: 11.2px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 4px;
+  letter-spacing: -0.5px;
+}
+
+.split-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.split-fields input {
+  display: inline-block;
+  width: 150px;
+}
+
+/* Homepage specific designs */
+
+#homepage {
+  background: steelblue;
+}
+
+#homepage main {
+  text-align: center;
+  margin: 50px auto;
+  min-width: 400px;
+  height: 80vh;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  color: white;
+}
+
+header p {
+  font-weight: 100;
+}
+
+#homepage .logo {
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: jokerman;
+}
+#homepage button {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  min-width: 390px;
+  margin: 15px auto;
+  padding: 0;
+  border-radius: 2px;
+}
+
+#signUpButtonLink {
+  border: 1px solid white;
+  text-decoration: none;
+  color: white;
+  background: none;
+}
+
+#loginButtonLink {
+  background: white;
+  color: steelblue;
+  border: none;
+}
+
+button a {
+  text-decoration: none;
+  display: block;
+}
+
+#loginButtonLink a {
+  color: steelblue;
+}
+#signUpButtonLink a,
+button a {
+  color: white;
+}
+
+/* All parcel view page */
+.profile-preview {
+  padding: 10px 16px;
+  margin: 20px auto;
+  border-bottom: 1px solid #fafafa;
+  max-width: 600px;
+}
+.profile-preview:hover {
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+}
+.profile-preview h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+}

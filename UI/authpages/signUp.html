@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            SendIT | SIGNUP
+        </title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../styles/styles.css" type="text/css">
+        <meta name="keywords" content="HTML,CSS,JavaScript">
+        <meta name="author" content="Adefolaju Ariyo">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar" id="navbar">
+                <div class="navbarLogo" >
+                            <a href="../home.html"> SENDIT </a> 
+                </div>
+                <div class="navbarMenu">
+                        <a target="self" href="logIn.html">LOGIN</a>
+                        <a href="signUp.html"> SIGNUP </a> 
+                       </div>
+            </nav>
+        </header>
+        <div id="mainView">
+            <div id="formSide">
+                <section id="formArea">
+                    <fieldset>
+                        <legend>Create Your Account</legend>
+                        <form action="/api/v1/auth/signup" method="POST" >
+                            <label> name </label>
+                            <div class="split-fields" >
+                                <input type="text" 
+                                        required 
+                                        placeholder="firstname" 
+                                        pattern="[a-zA-Z]{5,}"
+                                        maxlength="30"
+                                        name="firstName">
+                                <input type="text" 
+                                        required 
+                                        placeholder="lastname" 
+                                        pattern="[a-zA-Z]{5,}"
+                                        maxlength="30"
+                                        name="lastName">
+                            </div>
+                            <label> email address </label>
+                                <input type="email" 
+                                        required 
+                                        placeholder="email address"
+                                        name="email">
+                            <label> phone number </label>
+                                <input type="tel"
+                                        required
+                                        placeholder="phone number"
+                                        name="phoneNumber">
+                            <label> password </label>
+                            <div class="split-fields" >
+                                <input type="password" 
+                                        required
+                                        placeholder="password" 
+                                        name="password"
+                                        minlength="8">
+                                <input type="password" 
+                                        required
+                                        placeholder="confirm password" 
+                                        name="confirmPassword"
+                                        minlength="8">
+                            </div>
+                                <button id="signUp-button">CREATE MY ACCOUNT</button>
+                        </form>
+                    </fieldset>
+                </section>
+            </div>
+            <div id="formPageImage">
+
+            </div>
+        </div>
+
+    </body>
+</html>
+

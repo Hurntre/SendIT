@@ -1,0 +1,10 @@
+Following the new and updated structure
+
+ - Update signup controller to return response exactly as is specified in the project specification document
+ - Validate payload being sent in by user. things to validate should include
+    - users should not be able to submit empty body data
+    - validate that users provide correct email addresses
+    - write tests for the endpoint and also the validations you'll use
+
+    N.B make use of middleware for our validations.😎
+    also checkout mongoose validations for models and joi input validations

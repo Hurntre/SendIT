@@ -1,0 +1,253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Send IT",
+    "description": "Send-IT - a courier service that helps users deliver parcels to different destinations ",
+    "version": "1.0",
+    "contact": {
+      "email": "adefolajuariyo@gmail.com"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Welcome",
+      "description": "welcome users"
+    },
+    {
+      "name": "Auth",
+      "description": "SignUp,login users and reset password"
+    },
+    {
+      "name": "Parcel",
+      "description": "create, update, cancel, display parcels"
+    }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Welcome"],
+        "summary": "GET API endpoint for welcome page",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "welcome"
+          }
+        }
+      }
+    },
+
+    "/auth/signup": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "POST API endpoint for signing up new user",
+        "produces": ["application/json"],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "firstName",
+            "in": "formData",
+            "description": "first name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lastName",
+            "in": "formData",
+            "description": "last name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "email of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phoneNumber",
+            "in": "formData",
+            "description": "phone number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "users password",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "confirmPassword",
+            "in": "formData",
+            "description": "users password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user successfully created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "POST API endpoint for logging in user",
+        "produces": ["application/json"],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "email of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "users password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user successfully logged in"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/auth/reset": {
+      "post": {
+        "tag": ["Auth"],
+        "summary": "POST API endpoint for password reset mail request by user",
+        "produces": ["application/json"],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "email of the user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset email contained reset page link with token has been sent to provided mail"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/auth/reset/{token}": {
+      "get": {
+        "tag": ["Auth"],
+        "summary": "GET API endpoint for access to password reset page by user",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "token param is valid"
+          },
+          "400": {
+            "description": "Invalid token param"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "post": {
+        "tag": ["Auth"],
+        "summary": "POST API endpoint for password reset mail request by user",
+        "produces": ["application/json"],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "new password of the user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "confirmPassword",
+            "in": "formData",
+            "description": "new password confirmation",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset successful"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/parcel/parcels": {
+      "get": {
+        "tags": ["Parcel"],
+        "summary": "GET API endpoint for all parcels created by all users",
+        "parameters": {
+          "in": "header",
+          "name": "Authorization",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        },
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "All parcels retrieved successfully"
+          },
+          "400": {
+            "description": "No parcel exists in db"
+          },
+          "401": {
+            "description": "User not authorized"
+          },
+          "403": {
+            "description": "Invalid token"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "JWT": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}

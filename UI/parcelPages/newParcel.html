@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            SendIT | NEW PARCEL
+        </title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../styles/styles.css" type="text/css">
+        <meta name="keywords" content="HTML,CSS,JavaScript">
+        <meta name="author" content="Adefolaju Ariyo">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar" id="navbar">
+                <div class="navbarLogo" >
+                            <a href="../home.html"> SENDIT </a> 
+                </div>
+                <div class="navbarMenu">
+                        <a href="createParcel.html">New Parcel</a>
+                        <a href="">All Parcels</a> 
+                       </div>
+            </nav>
+        </header>
+            <div id="">
+                <section id="formArea">
+                    <fieldset>
+                        <legend>Create New Parcel</legend>
+                        <form action="/api/v1/parcels" method="POST" >
+                            <fieldset class="innerFieldset">
+                                <legend> Parcel Details</legend>
+                                    <label for="parcelDescription"> Description </label>
+                                        <input type="text" 
+                                                required 
+                                                placeholder="Parcel Description" 
+                                                pattern="[a-zA-Z]{5,}"
+                                                maxlength="30"
+                                                name="parcelDescription">
+                                    <label for="parcelWeight"> Weight </label>
+                                        <input type="text" 
+                                                required 
+                                                placeholder="Parcel Weight in KG" 
+                                                pattern=""
+                                                maxlength="5"
+                                                name="parcelWeight">
+                                    <label for="parcelValue"> Value </label>
+                                        <input type="text" 
+                                                required 
+                                                placeholder="Parcel Value"
+                                                name="parcelValue">
+                            </fieldset>    
+                            <fieldset class="innerFieldset">
+                                <legend> Receiver's Details </legend>
+                                <label for="receiversName"> Name </label>
+                                    <input type="text"
+                                        required
+                                        placeholder="Receiver's Name"
+                                        name="receiversName">
+                                <label for="receiversAddress"> Address </label>
+                                    <input type="text" 
+                                        required
+                                        placeholder="Receiver's Address" 
+                                        name="receiversAddress">
+                                <label for="receiversNumber"> Phone Number</label>
+                                    <input type="tel" 
+                                        required
+                                        placeholder="Receiver's Phone Number"
+                                        name="receiversPhoneNumber">
+                            </fieldset>
+                            <fieldset class="innerFieldset">
+                                <legend> Pickup Details</legend>
+                                <label for="pickupAddress"> Address </label>
+                                    <input type="text" 
+                                        required
+                                        placeholder="Pickup Address" 
+                                        name="pickupAddress">
+                                <label for="receiversNumber"> Phone Number</label>
+                                    <input type="tel" 
+                                        required
+                                        placeholder="Pickup Phone Number"
+                                        name="pickupPhoneNumber">
+                            </fieldset>
+                            
+                            <button id="Actionbutton">CREATE NEW PARCEL ORDER</button>
+                        </form>
+                    </fieldset>
+                </section>
+            </div>
+
+
+    </body>
+</html>
+

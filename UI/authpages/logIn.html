@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      SendIT | LOGIN
+    </title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../styles/styles.css" type="text/css" />
+    <meta name="keywords" content="HTML,CSS,JavaScript" />
+    <meta name="author" content="Adefolaju Ariyo" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar" id="navbar">
+        <div class="navbarLogo">
+          <a href="../home.html"> SENDIT </a>
+        </div>
+        <div class="navbarMenu">
+          <a target="self" href="logIn.html">LOGIN</a>
+          <a href="signUp.html"> SIGNUP </a>
+        </div>
+      </nav>
+    </header>
+    <div id="mainView">
+      <div id="formSide">
+        <section id="formArea">
+          <fieldset>
+            <legend>Login</legend>
+            <form action="/api/v1/auth/login" method="POST">
+              <label> email address </label>
+              <input
+                type="email"
+                required
+                placeholder="email address"
+                name="email"
+              />
+              <label> password </label>
+              <input
+                type="password"
+                required
+                placeholder="password"
+                name="password"
+              />
+              <a target="self" href="emailRequest.html" class="login-button">
+                Forgot Password?</a
+              >
+              <button class="login-button">LOGIN</button>
+            </form>
+          </fieldset>
+          <div id="Social Login">
+            <h2>Login Using...</h2>
+
+            <a href="api/v1/auth/google">
+              <button>Google+</button>
+            </a>
+          </div>
+        </section>
+      </div>
+      <div id="formPageImage"></div>
+    </div>
+  </body>
+</html>
