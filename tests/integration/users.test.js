@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 before(() => seeds.usersDeleteSeed());
 
 describe('User Creation', () => {
-  const route = '/api/v1/auth/signup';
+  const route = '/api/v1/users';
   it('should post user ', done => {
     chai
       .request(app)

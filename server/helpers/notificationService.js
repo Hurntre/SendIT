@@ -4,7 +4,7 @@ const resetMailOptions = (email, firstName, link) => {
     to: email,
     subject: '[SENDIT] Please reset your password',
     text: `Hi ${firstName} \n
-  We heard that you lost your SendIT passowrd.\n
+  We heard that you lost your SendIT password.\n
   Sorry about that! \n
   But don't worry! You can use the following link to reset your password: \n
   ${link} \n

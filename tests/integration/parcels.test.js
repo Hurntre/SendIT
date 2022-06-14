@@ -34,13 +34,13 @@ before('login user', done => {
 });
 
 describe('parcel endpoints', () => {
-  const route = '/api/v1/parcels';
+  const baseRoute = '/api/v1/parcels';
 
   describe('Get parcels', () => {
     it('should fetch all parcels in parcel collection', done => {
       chai
         .request(app)
-        .get(route)
+        .get(baseRoute)
         .set('authorization', `Bearer ${loginToken}`)
         .end((err, res) => {
           const { success, parcels } = res.body;
@@ -86,7 +86,7 @@ describe('parcel endpoints', () => {
     it('should throw an error when no user is logged in', done => {
       chai
         .request(app)
-        .get(route)
+        .get(baseRoute)
         .end((err, res) => {
           const {
             errors: { body },
@@ -101,7 +101,7 @@ describe('parcel endpoints', () => {
     it('should fetch single parcel from collection by id', done => {
       chai
         .request(app)
-        .get(`${route}/${parcelID}`)
+        .get(`${baseRoute}/${parcelID}`)
         .set('authorization', `Bearer ${loginToken}`)
         .end((err, res) => {
           const { success, parcel } = res.body;
@@ -115,7 +115,7 @@ describe('parcel endpoints', () => {
     it('should fail to fetch single parcel due to invalid parcel ID', done => {
       chai
         .request(app)
-        .get(`${route}/767a5666aea84a04be6ee7e9`)
+        .get(`${baseRoute}/767a5666aea84a04be6ee7e9`)
         .set('authorization', `Bearer ${loginToken}`)
         .end((err, res) => {
           const { success, error } = res.body;
@@ -130,7 +130,7 @@ describe('parcel endpoints', () => {
     it('should create a parcel', done => {
       chai
         .request(app)
-        .post(route)
+        .post(baseRoute)
         .set('authorization', `Bearer ${loginToken}`)
         .send({
           description: 'A White Nike Airforce 1',
@@ -153,7 +153,7 @@ describe('parcel endpoints', () => {
     it('should return an error due to invalid receiverAddress', done => {
       chai
         .request(app)
-        .post(route)
+        .post(baseRoute)
         .set('authorization', `Bearer ${loginToken}`)
         .send({
           description: 'A White Nike Airforce 1',
@@ -178,7 +178,7 @@ describe('parcel endpoints', () => {
     it('should return an error when authorization is not in header', done => {
       chai
         .request(app)
-        .post(route)
+        .post(baseRoute)
         .send({
           description: 'An apple laptop',
           weight: '3.0',
@@ -201,7 +201,7 @@ describe('parcel endpoints', () => {
     it('should return an error due to missing parcel description', done => {
       chai
         .request(app)
-        .post(route)
+        .post(baseRoute)
         .set('authorization', `Bearer ${loginToken}`)
         .send({
           weight: '3.0',
@@ -221,7 +221,7 @@ describe('parcel endpoints', () => {
     it('should return an error due to missing parcel pickUpDate', done => {
       chai
         .request(app)
-        .post(route)
+        .post(baseRoute)
         .set('authorization', `Bearer ${loginToken}`)
         .send({
           description: 'An apple laptop',
@@ -241,7 +241,7 @@ describe('parcel endpoints', () => {
     it('should return an error due to invalid parcel pickUpDate', done => {
       chai
         .request(app)
-        .post(route)
+        .post(baseRoute)
         .set('authorization', `Bearer ${loginToken}`)
         .send({
           description: 'A White Nike Airforce 1',
@@ -266,7 +266,7 @@ describe('parcel endpoints', () => {
     it('should return an error due to missing parcel weight', done => {
       chai
         .request(app)
-        .post(route)
+        .post(baseRoute)
         .set('authorization', `Bearer ${loginToken}`)
         .send({
           description: 'An apple laptop',
@@ -286,7 +286,7 @@ describe('parcel endpoints', () => {
     it('should return an error due to missing parcel receiverName', done => {
       chai
         .request(app)
-        .post(route)
+        .post(baseRoute)
         .set('authorization', `Bearer ${loginToken}`)
         .send({
           description: 'A White Nike Airforce 1',
@@ -310,7 +310,7 @@ describe('parcel endpoints', () => {
     it('should create parcel by user', done => {
       chai
         .request(app)
-        .post('/api/v1/parcels')
+        .post(baseRoute)
         .set('authorization', `Bearer ${loginToken}`)
         .send({
           description: 'A White Nike Airforce 1',
@@ -334,7 +334,7 @@ describe('parcel endpoints', () => {
     it('should fetch all parcels created by user', done => {
       chai
         .request(app)
-        .get(`/api/v1/users/${userID}/parcels`)
+        .get(`${baseRoute}/user/${userID}`)
         .set('authorization', `Bearer ${loginToken}`)
         .end((err, res) => {
           const { success, parcels } = res.body;

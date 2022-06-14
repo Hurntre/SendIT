@@ -17,11 +17,15 @@
     },
     {
       "name": "Auth",
-      "description": "SignUp,login users and reset password"
+      "description": "Authenticate users and reset password"
     },
     {
       "name": "Parcel",
       "description": "create, update, cancel, display parcels"
+    },
+    {
+      "name": "User",
+      "description": "Create new user"
     }
   ],
   "schemes": ["http"],
@@ -39,9 +43,9 @@
       }
     },
 
-    "/auth/signup": {
+    "/users": {
       "post": {
-        "tags": ["Auth"],
+        "tags": ["User"],
         "summary": "POST API endpoint for signing up new user",
         "produces": ["application/json"],
         "consumes": ["application/x-www-form-urlencoded"],
@@ -99,7 +103,7 @@
         }
       }
     },
-    "/auth/login": {
+    "/auth": {
       "post": {
         "tags": ["Auth"],
         "summary": "POST API endpoint for logging in user",
