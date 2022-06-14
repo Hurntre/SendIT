@@ -11,8 +11,8 @@ before(async () => {
   await seeds.userCreateSeed();
 });
 
-describe('User Login', () => {
-  const loginRoute = '/api/v1/auth/login';
+describe('User Authentication', () => {
+  const loginRoute = '/api/v1/auth';
   it('should login successfully', done => {
     chai
       .request(app)

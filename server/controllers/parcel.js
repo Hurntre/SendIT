@@ -7,12 +7,11 @@ import UserModel from '../db/models/user';
 export default class ParcelController {
   /**
    * @method getAllParcel
-   * @description gets all created parcel from db
+   * @description gets all created parcel
    * @param {*} req
    * @param {*} res
-   * @returns {object} all parcel
+   * @returns {object} all parcels
    */
-
   static async getAllParcel(req, res) {
     try {
       const parcels = await ParcelModel.find({});
@@ -43,7 +42,6 @@ export default class ParcelController {
    * @param {*} res
    * @returns {object} new parcel
    */
-
   static async createParcel(req, res) {
     const { _id, email } = req.user;
     const { body } = req;
@@ -70,6 +68,13 @@ export default class ParcelController {
     }
   }
 
+  /**
+   * @method getParcelByID
+   * @description get parcel by id
+   * @param {*} req
+   * @param {*} res
+   * @returns {object} single parcel
+   */
   static async getParcelByID(req, res) {
     try {
       const id = req.params.parcelID;
@@ -88,6 +93,38 @@ export default class ParcelController {
       });
     } catch (error) {
       res.status(500).send({
+        success: false,
+        error,
+      });
+    }
+  }
+
+  /**
+   * @method getParcelsByUserID
+   * @description gets all created parcels created by single user
+   * @param {*} req
+   * @param {*} res
+   * @returns {object} all parcels created by single user
+   */
+  static async getParcelsByUserID(req, res) {
+    const { userID } = req.params;
+
+    try {
+      const parcels = await ParcelModel.find({ senderID: userID });
+      if (!parcels) {
+        return res.status(400).send({
+          success: false,
+          error: 'No parcel exists in db',
+        });
+      }
+
+      return res.status(200).send({
+        success: true,
+        message: 'All parcels retrieved successfully',
+        parcels,
+      });
+    } catch (error) {
+      return res.status(500).send({
         success: false,
         error,
       });

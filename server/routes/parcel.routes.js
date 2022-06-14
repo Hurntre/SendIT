@@ -1,30 +1,63 @@
-import express from 'express';
+import { Router } from 'express';
 import controllers from '../controllers';
 import middlewares from '../middlewares';
 
+const router = Router();
+
 const {
-  verifyToken,
+  auth,
   newParcelValidation,
   verifyPickUpDate,
   verifyReceiverAddress,
   deliveryDateSetter,
 } = middlewares;
 
-const parcelRoute = express.Router();
-
 const {
-  parcelController: { getAllParcel, createParcel, getParcelByID },
+  parcelController: {
+    getAllParcel,
+    createParcel,
+    getParcelByID,
+    getParcelsByUserID,
+  },
 } = controllers;
 
-parcelRoute.get('/', verifyToken, getAllParcel);
-parcelRoute.post(
+/**
+ * @route GET api/v1/parcels
+ * @description Get all parcels
+ * @access Public
+ */
+
+// I should make this route private for the admin dashboard
+// add pagination and caching
+router.get('/', auth, getAllParcel);
+
+/**
+ * @route POST api/v1/parcels
+ * @description Create a parcel
+ * @access Private
+ */
+router.post(
   '/',
-  verifyToken,
+  auth,
   deliveryDateSetter,
   newParcelValidation,
   verifyPickUpDate,
   verifyReceiverAddress,
   createParcel
 );
-parcelRoute.get('/:parcelID', verifyToken, getParcelByID);
-export default parcelRoute;
+
+/**
+ * @route GET api/v1/parcels/:parcelID
+ * @description Get a single parcel by ID
+ * @access Private
+ */
+router.get('/:parcelID', auth, getParcelByID);
+
+/**
+ * @route GET api/v1/parcels/user/:userID
+ * @description Get all parcels created by a single user
+ * @access Private
+ */
+router.get('/user/:userID', auth, getParcelsByUserID);
+
+export default router;

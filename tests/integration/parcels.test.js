@@ -13,17 +13,20 @@ before(async () => {
 
 let loginToken;
 let parcelID;
+let userID;
+
 before('login user', done => {
   chai
     .request(app)
-    .post('/api/v1/auth/login')
+    .post('/api/v1/auth')
     .send({
       email: 'admin@yahoo.com',
       password: 'pAsSwOrD',
     })
     .end((err, res) => {
-      const { success, token } = res.body;
+      const { success, token, user } = res.body;
       loginToken = token;
+      userID = user._id;
       expect(res).to.have.status(200);
       expect(success).to.equal(true);
       done();
@@ -33,7 +36,7 @@ before('login user', done => {
 describe('parcel endpoints', () => {
   const route = '/api/v1/parcels';
 
-  describe('Parcel GET requests', () => {
+  describe('Get parcels', () => {
     it('should fetch all parcels in parcel collection', done => {
       chai
         .request(app)
@@ -123,7 +126,7 @@ describe('parcel endpoints', () => {
         });
     });
   });
-  describe('Parcel POST requests ', () => {
+  describe('Create Parcels ', () => {
     it('should create a parcel', done => {
       chai
         .request(app)
@@ -299,6 +302,45 @@ describe('parcel endpoints', () => {
           expect(res).to.have.status(400);
           expect(success).to.equal(false);
           expect(error).to.equal('receiverName is required');
+          done();
+        });
+    });
+  });
+  describe('User parcel endpoints', () => {
+    it('should create parcel by user', done => {
+      chai
+        .request(app)
+        .post('/api/v1/parcels')
+        .set('authorization', `Bearer ${loginToken}`)
+        .send({
+          description: 'A White Nike Airforce 1',
+          weight: 1.15,
+          pickUpDate: Date.now() + 86500000,
+          pickUpAddress: 'No 5, National Stadium Crescent, Abuja town, Florida',
+          receiverName: 'Aderonbi',
+          receiverPhoneNumber: '08111111111',
+          receiverAddress:
+            'your house number, street, area, town, city, state.',
+        })
+        .end((err, res) => {
+          const { success, message } = res.body;
+          expect(res).to.have.status(200);
+          expect(success).to.equal(true);
+          expect(message).to.equal('new parcel created successfully');
+
+          done();
+        });
+    });
+    it('should fetch all parcels created by user', done => {
+      chai
+        .request(app)
+        .get(`/api/v1/users/${userID}/parcels`)
+        .set('authorization', `Bearer ${loginToken}`)
+        .end((err, res) => {
+          const { success, parcels } = res.body;
+          expect(res).to.have.status(200);
+          expect(success).to.equal(true);
+          expect(parcels).to.be.a('array');
           done();
         });
     });

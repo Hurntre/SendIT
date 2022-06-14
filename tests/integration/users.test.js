@@ -308,7 +308,7 @@ describe('User Creation', () => {
         done();
       });
   });
-  it('should give error due to unmatching password and confirmPassword', done => {
+  it('should give error due to password and confirmPassword not matching', done => {
     chai
       .request(app)
       .post(route)

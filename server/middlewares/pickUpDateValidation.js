@@ -1,6 +1,6 @@
 /**
- * @method verifyToken
- * @description Verifies the token provided by the user
+ * @method verifyPickUpDate
+ * @description Verifies new parcel pick up date provided by the user
  * @param {*} req
  * @param {*} res
  * @returns {*} - JSON response object

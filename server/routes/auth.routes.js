@@ -1,18 +1,19 @@
 /* eslint-disable no-unused-vars */
-import express from 'express';
+import { Router } from 'express';
 import passport from 'passport';
 import controllers from '../controllers';
 import middlewares from '../middlewares';
 import passportSetup from '../config/passportSetup';
 
-const authRoute = express.Router();
+const router = Router();
 
 const {
-  signupValidation,
   loginValidation,
-  userCheckByEmail,
-  userCheckByPhone,
-  resetValidations,
+  resetValidations: {
+    emailValidation,
+    newPasswordValidation,
+    passwordMatchCheck,
+  },
 } = middlewares;
 
 const {
@@ -20,38 +21,51 @@ const {
     loginController,
     passwordResetPageRequest,
     passwordResetRequest,
-    signUpController,
     updatePassword,
     socialRedirect,
   },
 } = controllers;
 
-authRoute.post(
-  '/signup',
-  signupValidation,
-  userCheckByEmail,
-  userCheckByPhone,
-  signUpController
-);
+/**
+ * @route POST api/v1/auth
+ * @description Authenticate user and return token
+ * @access Public
+ */
+router.post('/', loginValidation, loginController);
 
-authRoute.post('/login', loginValidation, loginController);
+/**
+ * @route POST api/v1/auth/reset
+ * @description Request password reset
+ * @access Public
+ */
+router.post('/reset', emailValidation, passwordResetRequest);
 
-authRoute.post(
-  '/reset',
-  resetValidations.emailValidation,
-  passwordResetRequest
-);
+/**
+ * @route GET api/v1/auth/reset/:token
+ * @description Get password reset page
+ * @access Private
+ */
+router.get('/reset/:token', passwordResetPageRequest);
 
-authRoute.get('/reset/:token', passwordResetPageRequest);
-
-authRoute.post(
+/**
+ * @route POST api/v1/auth/reset/:token
+ * @description create new password
+ * @access Private
+ */
+router.post(
   '/reset/:token',
-  resetValidations.newPasswordValidation,
-  resetValidations.passwordMatchCheck,
+  newPasswordValidation,
+  passwordMatchCheck,
   updatePassword
 );
 
-authRoute.get(
+/**
+ * @route GET api/v1/auth/google
+ * @description Google Oauth
+ * @access Public
+ */
+
+router.get(
   '/google',
   passport.authenticate('google', {
     scope: [
@@ -62,18 +76,25 @@ authRoute.get(
   })
 );
 
-authRoute.get(
-  '/google/redirect',
-  passport.authenticate('google'),
-  socialRedirect
-);
+/**
+ * @route GET api/v1/auth/google/redirect
+ * @description Google Oauth redirect page
+ * @access Private
+ */
+router.get('/google/redirect', passport.authenticate('google'), socialRedirect);
 
-authRoute.get('/github', passport.authenticate('github', { scope: ['user'] }));
+/**
+ * @route GET api/v1/auth/github
+ * @description Github Oauth
+ * @access Public
+ */
+router.get('/github', passport.authenticate('github', { scope: ['user'] }));
 
-authRoute.get(
-  '/github/redirect',
-  passport.authenticate('github'),
-  socialRedirect
-);
+/**
+ * @route GET api/v1/auth/github/redirect
+ * @description Github Oauth redirect page
+ * @access Private
+ */
+router.get('/github/redirect', passport.authenticate('github'), socialRedirect);
 
-export default authRoute;
+export default router;

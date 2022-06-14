@@ -1,16 +1,9 @@
-import express from 'express';
-
-// auth Routes
+import { Router } from 'express';
 import authRoute from './auth.routes';
-
-// parcel Routes
 import parcelRoute from './parcel.routes';
-
-// user Routes
 import userRoute from './user.routes';
 
-// express router
-const router = express.Router();
+const router = Router();
 
 router.use('/auth', authRoute);
 router.use('/parcels', parcelRoute);

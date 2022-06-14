@@ -1,15 +1,26 @@
-import express from 'express';
+import { Router } from 'express';
 import controllers from '../controllers';
 import middlewares from '../middlewares';
 
-const { verifyToken } = middlewares;
+const router = Router();
+
+const { signupValidation, userCheckByEmail, userCheckByPhone } = middlewares;
 
 const {
-  userController: { getAllParcelsByUser },
+  userController: { signUpController },
 } = controllers;
 
-const userRoute = express.Router();
+/**
+ * @route POST api/v1/users
+ * @description Register a user
+ * @access Public
+ */
+router.post(
+  '/',
+  signupValidation,
+  userCheckByEmail,
+  userCheckByPhone,
+  signUpController
+);
 
-userRoute.get('/:userID/parcels', verifyToken, getAllParcelsByUser);
-
-export default userRoute;
+export default router;
