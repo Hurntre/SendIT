@@ -1,7 +1,5 @@
 # SendIT
 
-[![Build Status](https://travis-ci.com/Hurntre/SendIT.svg?branch=master)](https://travis-ci.com/Hurntre/SendIT)
-[![Maintainability](https://api.codeclimate.com/v1/badges/72bb60c7a06a947c2999/maintainability)](https://codeclimate.com/github/Hurntre/SendIT/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/Hurntre/SendIT/badge.svg?branch=master)](https://coveralls.io/github/Hurntre/SendIT?branch=master)
 
 SendIT - is a courier service that helps users deliver parcels to different destinations.
