@@ -1,5 +1,7 @@
 # SendIT
 
+![NPM](https://img.shields.io/npm/l/express)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/hurntre/SendIT)
 [![Coverage Status](https://coveralls.io/repos/github/Hurntre/SendIT/badge.svg?branch=master)](https://coveralls.io/github/Hurntre/SendIT?branch=master)
 
 SendIT - is a courier service that helps users deliver parcels to different destinations.
