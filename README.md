@@ -56,7 +56,7 @@ $ npm run test
 
 - [NodeJS](http://nodejs.org/en) is a JavaScript runtime built on Chrome's V8 JavaScript engine
 - [Express JS](http://express.com) A minimalist web framework
-- [Sequelize](http://docs.sequelizejs.com/) Sequelize is a promise-based ORM for Node.js v4 and up. It supports the dialects PostgreSQL, MySQL, SQLite and MSSQL and features solid transaction support, relations, read replication and more.
+- [Mongoose](https://mongoosejs.com/docs/guide.html) Mongoose is a JavaScript object-oriented programming library that creates a connection between MongoDB and the Express web application framework.
 - [MongoDB](https://www.mongodb.com/) The database for modern applications.
 - [Mocha](https://mochajs.org/) Mocha is a feature-rich JavaScript test framework running on [NodeJS](nodejs.org/en) for testing [Javascript](javascript.com) applications.
 
@@ -79,7 +79,7 @@ $ npm run test
 
 ## Pivotal Tracker
 
-Project is currently being managed with Pivotal Tracker, a project management tool. You can find the stories on the [politico Pivotal Tracker Board](https://www.pivotaltracker.com/n/projects/2318856)
+Project is currently being managed with Pivotal Tracker, a project management tool. You can find the stories on the [SendIT Pivotal Tracker Board](https://www.pivotaltracker.com/n/projects/2401430)
 
 ## Authors
 
