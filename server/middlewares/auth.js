@@ -1,14 +1,14 @@
 import validations from '../helpers/validations';
 
 /**
- * @method verifyToken
+ * @method auth
  * @description Verifies the token provided by the user
  * @param {*} req
  * @param {*} res
  * @returns {*} - JSON response object
  */
 
-const verifyToken = (req, res, next) => {
+const auth = (req, res, next) => {
   const payload = validations.verifyAuthHeader(req);
 
   let error;
@@ -33,4 +33,4 @@ const verifyToken = (req, res, next) => {
   return next();
 };
 
-export default verifyToken;
+export default auth;

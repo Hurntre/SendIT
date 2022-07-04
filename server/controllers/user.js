@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
-import ParcelModel from '../db/models/parcel';
-// import UserModel from '../db/models/user';
+import UserModel from '../db/models/user';
+import authHelper from '../helpers/auth';
 
 /**
  *  @class UserController
@@ -8,29 +8,28 @@ import ParcelModel from '../db/models/parcel';
 
 export default class UserController {
   /**
-   * @method getAllParcel
-   * @description gets all created parcel from db
+   * @method registerUser
+   * @description registers a user with their email
    * @param {*} req
    * @param {*} res
-   * @returns {object} all parcel
+   * @returns {object} registered user
    */
+  static async signUpController(req, res) {
+    const { body } = req;
 
-  static async getAllParcelsByUser(req, res) {
-    const { userID } = req.params;
+    const userEmail = body.email;
+    body.email = userEmail.toLowerCase();
 
     try {
-      const parcels = await ParcelModel.find({ senderID: userID });
-      if (!parcels) {
-        return res.status(400).send({
-          success: false,
-          error: 'No parcel exists in db',
-        });
-      }
+      UserModel.create(body, (err, data) => {
+        const { _id, email, isAdmin } = data;
+        const token = authHelper.encode({ _id, email, isAdmin });
 
-      return res.status(200).send({
-        success: true,
-        message: 'All parcels retrieved successfully',
-        parcels,
+        res.status(200).json({
+          success: true,
+          token,
+          data,
+        });
       });
     } catch (error) {
       return res.status(500).send({

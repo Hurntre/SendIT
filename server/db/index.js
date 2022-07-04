@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: false}}] */
 const MONGO_URI = process.env.MONGODB_URL;
-const TEST_MONGO_URI = process.env.TEST_MONGO_URI;
+const TEST_MONGO_URI = process.env.TEST_MONGODB_URL;
 
 // TODO: Refactor new Promise to use tryCatch if possible
 

@@ -7,7 +7,7 @@ import geocoder from '../helpers/geocoder';
  * @returns {*} - JSON response object
  */
 const env = process.env.NODE_ENV;
-const googleAPIkey = process.env.GOOGLE_API;
+const googleAPIkey = process.env.GOOGLE_API_KEY;
 
 const verifyReceiverAddress = async (req, res, next) => {
   const { receiverAddress } = req.body;

@@ -5,7 +5,7 @@ import userCheckByPhone from './userCheckByPhone.middleware';
 import loginValidation from './loginValidation';
 import resetValidations from './resetValidation';
 import newParcelValidation from './newParcelValidation';
-import verifyToken from './isLoggedIn';
+import auth from './auth';
 import verifyPickUpDate from './pickUpDateValidation';
 import verifyReceiverAddress from './addressValidation';
 import checkUserRole from './checkUserRole';
@@ -19,7 +19,7 @@ export default {
   userCheckByPhone,
   resetValidations,
   newParcelValidation,
-  verifyToken,
+  auth,
   verifyPickUpDate,
   verifyReceiverAddress,
   checkUserRole,
